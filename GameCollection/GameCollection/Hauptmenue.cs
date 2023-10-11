@@ -1,6 +1,6 @@
 ﻿using System.Numerics;
 
-internal class Program
+internal class Hauptmenue
 {
     private static List<string> gameList = new List<string>();
     private static void Main(string[] args)
@@ -39,6 +39,7 @@ internal class Program
     private static void StartMiniGame(string? input)
     {
         Console.WriteLine(gameList[int.Parse(input)] + " wird gestartet!");
+        
     }
 
     private static void InitGameList()
