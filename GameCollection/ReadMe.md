@@ -42,3 +42,16 @@
 - Testing
   - DIY Mocks
   - Test Runner? VS Intern?
+
+## Class convention 
+
+- Variables:
+  - private: always start with _dummy
+  - protected
+  - public
+
+- Methods:
+  - public
+  - private 
+  - protected
+  
