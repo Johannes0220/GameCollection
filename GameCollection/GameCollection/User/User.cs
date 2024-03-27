@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace GameCollection.User
 {
-    class User
+    public class User
     {
-        private Guid Id;
-        private string Name;
+        public Guid Id;
+        public string Name;
         //private Archivements[]
        // private Dictionary<IGame, IScore> GameScores;
     }

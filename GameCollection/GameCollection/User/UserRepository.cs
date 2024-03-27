@@ -2,18 +2,32 @@
 using System.Text.Json;
 
 
+
 namespace GameCollection.User
 {
     public class UserRepository
     {
         private FileInfo _userFile;
-        private User[] _users;
+        private LinkedList<User> _users;
         public UserRepository(FileInfo userFile)
         {
+            _users = new LinkedList<User>();
             _userFile = userFile;
             InitUserPersistation();
         }
 
+        public User GetUserById(Guid id)
+        {
+            foreach (var user in _users)
+            {
+                if (user.Id.Equals(id))
+                {
+                    return user;
+                }
+            }
+
+            throw new FileNotFoundException("User does not Exist");
+        }
         private void InitUserPersistation()
         {
             if (File.Exists(_userFile.FullName))
@@ -26,8 +40,8 @@ namespace GameCollection.User
             {
                 Directory.CreateDirectory(_userFile.Directory.FullName);
                 using var file = File.Create(_userFile.FullName);
-                file.WriteAsync(Encoding.UTF8.GetBytes("[]"));
                 file.Close();
+                WriteUsersToFile();
             }
             catch (Exception e)
             {
@@ -43,7 +57,7 @@ namespace GameCollection.User
             try
             {
                 var usersString = File.ReadAllText(this._userFile.FullName);
-                this._users = JsonSerializer.Deserialize<User[]>(usersString);
+                this._users =JsonSerializer.Deserialize<LinkedList<User>>(usersString);
             }
             catch (Exception e)
             {
