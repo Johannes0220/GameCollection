@@ -2,14 +2,14 @@
 using System.Reflection.Metadata;
 using System.Runtime.CompilerServices;
 using GameCollection.User;
+using Utils;
 
 public class Bootstrapper
 {
     private static UserRepository _userRepository;
-    private static DirectoryInfo rootPath = new DirectoryInfo(Environment.CurrentDirectory);
-    private static DirectoryInfo storagePath = new DirectoryInfo(Path.Combine(rootPath.FullName,"storage"));
-
-    private static DirectoryInfo localUserPath =new DirectoryInfo(Path.Combine(storagePath.FullName,"users"));
+    private static readonly DirectoryInfo _rootPath = new(Environment.CurrentDirectory);
+    private static readonly DirectoryInfo _storagePath = new(Path.Combine(_rootPath.FullName,"storage"));
+    private static readonly DirectoryInfo _localUserPath =new (Path.Combine(_storagePath.FullName,"users"));
     private static void Main(string[] args)
     {
         InitializeUserRepository();
@@ -17,6 +17,7 @@ public class Bootstrapper
 
     private static void InitializeUserRepository()
     {
-        _userRepository = new UserRepository(new FileInfo(Path.Combine(localUserPath.FullName,"Users.json")));
+        var jsonSerializer = new CustomJsonSerializer();
+        _userRepository = new UserRepository(new FileInfo(Path.Combine(_localUserPath.FullName,"Users.json")),jsonSerializer);
     }
 }
