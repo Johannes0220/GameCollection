@@ -1,18 +1,20 @@
 ﻿using System.Text;
 using System.Text.Json;
-
+using Utils;
 
 
 namespace GameCollection.User
 {
     public class UserRepository
     {
-        private FileInfo _userFile;
+        private readonly FileInfo _userFile;
+        private readonly ICustomJsonSerializer _jsonSerializer;
         private LinkedList<User> _users;
-        public UserRepository(FileInfo userFile)
+        public UserRepository(FileInfo userFile, ICustomJsonSerializer jsonSerializer)
         {
             _users = new LinkedList<User>();
             _userFile = userFile;
+            _jsonSerializer = jsonSerializer;
             InitUserPersistation();
         }
 
@@ -57,7 +59,7 @@ namespace GameCollection.User
             try
             {
                 var usersString = File.ReadAllText(this._userFile.FullName);
-                this._users =JsonSerializer.Deserialize<LinkedList<User>>(usersString);
+                this._users =_jsonSerializer.Deserialize<LinkedList<User>>(usersString);
             }
             catch (Exception e)
             {
@@ -72,7 +74,7 @@ namespace GameCollection.User
         {
             try
             {
-                var usersJson = JsonSerializer.Serialize(this._users);
+                var usersJson = _jsonSerializer.Serialize(this._users);
                 File.WriteAllText(this._userFile.FullName, usersJson);
             }
             catch (Exception e)

@@ -3,25 +3,25 @@
 
 namespace Utils
 {
-    public class CustomJsonSerializer
+    public class CustomJsonSerializer : ICustomJsonSerializer
     {
-        public CustomJsonSerializer()
-        {
-
-        }
+        public JsonSerializer serializer;
+    public CustomJsonSerializer()
+    {
+        serializer = new JsonSerializer();
+    }
 
         public string Serialize(object obj)
         {
             using var writer = new StringWriter();
-            using var serializer = new JsonSerializer();
+            
             serializer.Serialize(writer, obj);
             return writer.ToString();
         }
 
         public T Deserialize<T>(string json)
         {
-            using var serializer = new JsonSerializer();
-            return serializer.Deserialize<T>(new JsonTextReader(new JsonTextReader(new StringReader(json))));
+            return serializer.Deserialize<T>(new JsonTextReader(new StringReader(json)));
         }
     }
 }

@@ -51,6 +51,7 @@ namespace Test
             var writer = new StringWriter();
             var serializer=new JsonSerializer();
             serializer.Serialize(writer,users);
+            
             var usersJson=writer.ToString();
             File.WriteAllText(testUserFile.FullName, usersJson);
 
