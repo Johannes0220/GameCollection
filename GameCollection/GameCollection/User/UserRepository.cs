@@ -30,6 +30,34 @@ namespace GameCollection.User
 
             throw new FileNotFoundException("User does not Exist");
         }
+
+        public User CreateUser(Guid id, string name)
+        {
+
+            var user=new User(id, name);
+            _users.AddLast(user);
+            WriteUsersToFile();
+            return user;
+        }
+
+        public User UpdateUser(Guid id, string name)
+        {
+            User user;
+            try
+            {
+                user=GetUserById(id);
+            }
+            catch
+            {
+                throw new FileNotFoundException("This user does not Exist!");
+            }
+            _users.Remove(user);
+
+            var newUser = new User(id, name);
+            _users.AddLast(newUser);
+            WriteUsersToFile();
+            return newUser;
+        }
         private void InitUserPersistation()
         {
             if (File.Exists(_userFile.FullName))

@@ -2,6 +2,7 @@ using System.Text;
 
 using GameCollection.User;
 using Newtonsoft.Json;
+using Utils;
 
 namespace Test
 {
@@ -9,8 +10,6 @@ namespace Test
     public class UserRepositoryTest
     {
         private FileInfo testUserFile = new FileInfo("D:\\Test\\User.json");
-
-        private UserRepository _userRepository;
 
 
         [TestMethod]
@@ -27,7 +26,7 @@ namespace Test
             }
 
             //Act
-            _userRepository = new UserRepository(testUserFile);
+            var _userRepository = new UserRepository(testUserFile, new CustomJsonSerializer());
 
             //Test
             Assert.IsTrue(File.Exists(testUserFile.FullName));
@@ -56,7 +55,7 @@ namespace Test
             File.WriteAllText(testUserFile.FullName, usersJson);
 
             //Act
-            _userRepository = new UserRepository(testUserFile);
+            var _userRepository = new UserRepository(testUserFile, new CustomJsonSerializer());
 
             //Test
             Assert.IsTrue(File.Exists(testUserFile.FullName));

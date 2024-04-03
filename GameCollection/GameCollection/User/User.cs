@@ -8,6 +8,11 @@ namespace GameCollection.User
 {
     public class User
     {
+        public User(Guid id, string name)
+        {
+            Id=id; 
+            Name=name;
+        }
         public Guid Id;
         public string Name;
         //private Archivements[]
