@@ -20,7 +20,6 @@
 ## Technische Umsetzung
 
 - GameRepository
-- PlayerRepository
 - Game(Interface)
   - Start
   - Stop
@@ -33,10 +32,12 @@
   - Name
   - Archivements
   - Game-Score-Map
+- PlayerRepository
   
 - Archivement
   - Name
   - Condition
+  - Game???Games[]
 - ArchivementRepository
 
 - Testing
