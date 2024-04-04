@@ -33,5 +33,6 @@ public class GuessTheNumberView
     {
         Console.WriteLine("Press any key to exit...");
         Console.ReadKey(true);
+        Console.Clear();
     }
 }

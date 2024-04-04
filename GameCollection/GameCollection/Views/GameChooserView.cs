@@ -29,7 +29,8 @@ namespace GameCollection.Views
                 Console.WriteLine("\t" + i + ". " + _gameList[i].Name);
             }
 
-            var gameNum = ReadNumericInput("",0,_gameList.Count);
+            var gameNum = ReadNumericInput("",0,_gameList.Count-1);
+            Console.Clear();
             return _gameList[gameNum];
         }
     }
