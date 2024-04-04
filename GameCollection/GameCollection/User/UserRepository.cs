@@ -9,13 +9,18 @@ namespace GameCollection.User
     {
         private readonly FileInfo _userFile;
         private readonly ICustomJsonSerializer _jsonSerializer;
-        private LinkedList<User> _users;
+        private List<User> _users;
         public UserRepository(FileInfo userFile, ICustomJsonSerializer jsonSerializer)
         {
-            _users = new LinkedList<User>();
+            _users = new List<User>();
             _userFile = userFile;
             _jsonSerializer = jsonSerializer;
             InitUserPersistation();
+        }
+
+        public List<User> GetAllUsers()
+        {
+            return _users;
         }
 
         public User GetUserById(Guid id)
@@ -35,7 +40,7 @@ namespace GameCollection.User
         {
 
             var user=new User(id, name);
-            _users.AddLast(user);
+            _users.Add(user);
             WriteUsersToFile();
             return user;
         }

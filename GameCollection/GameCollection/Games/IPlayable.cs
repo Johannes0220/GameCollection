@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace GameCollection.Games
 {
-    internal interface IPlayable
+    public interface IPlayable
     {
+        string getName();
     }
 }

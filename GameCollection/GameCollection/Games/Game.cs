@@ -1,9 +1,13 @@
 ﻿
 namespace GameCollection.Games
 {
-    public class Game
+    public class Game:IPlayable
     {
-        private Guid Id;
-        private string Name;
+        private readonly Guid Id;
+        private readonly string Name;
+        public string getName()
+        {
+            return Name;
+        }
     }
 }

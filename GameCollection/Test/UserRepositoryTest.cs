@@ -46,7 +46,7 @@ namespace Test
             var guid = Guid.NewGuid();
             var name = "someName";
             var user = new User(guid,name);
-            var users = new LinkedList<User>(new User[] { user });
+            var users = new List<User>(new User[] { user });
             var writer = new StringWriter();
             var serializer=new JsonSerializer();
             serializer.Serialize(writer,users);
