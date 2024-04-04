@@ -1,7 +1,7 @@
 ﻿
 namespace GameCollection.Games
 {
-    public class GameRepository
+    public class GameRepository : IGameRepository
     {
         public List<IPlayable> GetAllGames()
         {

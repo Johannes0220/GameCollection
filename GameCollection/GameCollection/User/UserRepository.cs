@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.Collections;
+using System.Text;
 using System.Text.Json;
 using Utils;
 
@@ -9,29 +10,38 @@ namespace GameCollection.User
     {
         private readonly FileInfo _userFile;
         private readonly ICustomJsonSerializer _jsonSerializer;
-        private List<User> _users;
+        //private List<User> _users;
+        private Hashtable _users;
         public UserRepository(FileInfo userFile, ICustomJsonSerializer jsonSerializer)
         {
-            _users = new List<User>();
+            //_users = new List<User>();
+            _users=new Hashtable();
             _userFile = userFile;
             _jsonSerializer = jsonSerializer;
             InitUserPersistation();
         }
 
         public List<User> GetAllUsers()
+
         {
-            return _users;
+            var users = _users.Values;
+            
+            
+            return users.Cast<User>().ToList(); ;
         }
 
         public User GetUserById(Guid id)
         {
-            foreach (var user in _users)
-            {
-                if (user.Id.Equals(id))
-                {
-                    return user;
-                }
-            }
+
+            var user=_users[id];
+            //foreach (var user in _users)
+            //{
+            //    if (user.Id.Equals(id))
+            //    {
+            //        return user;
+            //    }
+            //}
+
 
             throw new FileNotFoundException("User does not Exist");
         }

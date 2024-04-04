@@ -11,10 +11,10 @@ namespace GameCollection.Controller
 {
     public class MainController
     {
-        private readonly GameRepository _gameRepository;
+        private readonly IGameRepository _gameRepository;
         private readonly UserRepository _userRepository;
 
-        public MainController(GameRepository gameRepository, UserRepository userRepository)
+        public MainController(IGameRepository gameRepository, UserRepository userRepository)
         {
             _gameRepository = gameRepository;
             _userRepository = userRepository;
