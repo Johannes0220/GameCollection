@@ -11,11 +11,11 @@ namespace GameCollection.User
         private readonly FileInfo _userFile;
         private readonly ICustomJsonSerializer _jsonSerializer;
         //private List<User> _users;
-        private Hashtable _users;
+        private Dictionary<Guid, User> _users;
         public UserRepository(FileInfo userFile, ICustomJsonSerializer jsonSerializer)
         {
             //_users = new List<User>();
-            _users=new Hashtable();
+            _users=new Dictionary<Guid, User>();
             _userFile = userFile;
             _jsonSerializer = jsonSerializer;
             InitUserPersistation();
@@ -46,11 +46,11 @@ namespace GameCollection.User
             throw new FileNotFoundException("User does not Exist");
         }
 
-        public User CreateUser(Guid id, string name)
+        public User CreateUser(string name)
         {
 
-            var user=new User(id, name);
-            _users.Add(user);
+            var user=new User(Guid.NewGuid(), name);
+            _users.Add(user.Id,user);
             WriteUsersToFile();
             return user;
         }
@@ -66,10 +66,10 @@ namespace GameCollection.User
             {
                 throw new FileNotFoundException("This user does not Exist!");
             }
-            _users.Remove(user);
+            _users.Remove(user.Id);
 
             var newUser = new User(id, name);
-            _users.AddLast(newUser);
+            _users.Add(newUser.Id, newUser);
             WriteUsersToFile();
             return newUser;
         }
@@ -102,7 +102,7 @@ namespace GameCollection.User
             try
             {
                 var usersString = File.ReadAllText(this._userFile.FullName);
-                this._users =_jsonSerializer.Deserialize<LinkedList<User>>(usersString);
+                this._users =_jsonSerializer.Deserialize<Dictionary<Guid, User>>(usersString);
             }
             catch (Exception e)
             {

@@ -19,7 +19,7 @@ public abstract class BasicView
             return false;
         }
 
-        if (inputNum >= lowerBound && inputNum < upperBound)
+        if (inputNum >= lowerBound && inputNum <= upperBound)
         {
             return true;
         }
@@ -40,5 +40,29 @@ public abstract class BasicView
         }
 
         return int.Parse(input);
+    }
+
+    protected string ReadTextInput(string question)
+    {
+        var valid = false;
+        var input = "Keine Eingabe";
+        while (!valid)
+        {
+            Console.Write(question);
+            input = Console.ReadLine();
+            valid = HandleTextInput(input);
+        }
+
+        return input;
+    }
+
+    protected bool HandleTextInput(string input)
+    {
+        if (string.IsNullOrEmpty(input))
+        {
+            return false;
+        }
+
+        return true;
     }
 }

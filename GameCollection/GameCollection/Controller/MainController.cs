@@ -22,6 +22,8 @@ namespace GameCollection.Controller
 
         public void RunGameCollection()
         {
+            var userView = new UserChooseAndCreateView(_userRepository);
+            var user = userView.Show();
             var gameChooserView = new GameChooserView(_gameRepository);
             var game = gameChooserView.Show();
             
