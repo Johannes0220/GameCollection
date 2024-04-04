@@ -7,6 +7,12 @@ public class GuessTheNumberController:IPlayable
     private readonly string _name = "GuessTheNumber";
     private readonly Guid _guid = Guid.NewGuid();
 
+
+    public GuessTheNumberController()
+    {
+        _guessTheNumber= new GuessTheNumber();
+        _guessTheNumberView= new GuessTheNumberView();
+    }
     public GuessTheNumberController(GuessTheNumber guessTheNumber, GuessTheNumberView guessTheNumberView)
     {
         _guessTheNumber = guessTheNumber;

@@ -9,5 +9,7 @@ namespace GameCollection.Games
     public interface IPlayable
     {
         string getName();
+
+        void StartGame();
     }
 }

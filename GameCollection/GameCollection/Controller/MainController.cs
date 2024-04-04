@@ -24,9 +24,23 @@ namespace GameCollection.Controller
         {
             var userView = new UserChooseAndCreateView(_userRepository);
             var user = userView.Show();
-            var gameChooserView = new GameChooserView(_gameRepository);
-            var game = gameChooserView.Show();
-            
+            while (true)
+            {
+                var gameChooserView = new GameChooserView(_gameRepository);
+                var game = gameChooserView.Show();
+                try
+                {
+                    var activeGame = (IPlayable)Activator.CreateInstance(game);
+                    activeGame.StartGame();
+                }
+                catch
+                {
+                    var ex=new Exception(
+                        "Something went wrong with this game! Please contact the developers to fix the issue");
+                    Console.WriteLine(ex);
+                }
+            }
+
         }
     }
 }

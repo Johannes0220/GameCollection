@@ -11,7 +11,7 @@ namespace GameCollection.Views
     public class GameChooserView : BasicView
     {
         private readonly IGameRepository _gameRepository;
-        private readonly List<IPlayable> _gameList;
+        private readonly List<Type> _gameList;
 
         public GameChooserView(IGameRepository gameRepository)
         {
@@ -20,13 +20,13 @@ namespace GameCollection.Views
         }
 
 
-        public override IPlayable Show()
+        public override Type Show()
         {
             Console.WriteLine("Choose the game you'd like to play!");
 
             for (int i = 0; i < _gameList.Count; i++)
             {
-                Console.WriteLine("\t" + i + ". " + _gameList[i].getName());
+                Console.WriteLine("\t" + i + ". " + _gameList[i].Name);
             }
 
             var gameNum = ReadNumericInput("",0,_gameList.Count);

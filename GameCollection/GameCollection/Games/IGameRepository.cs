@@ -2,5 +2,5 @@
 
 public interface IGameRepository
 {
-    List<IPlayable> GetAllGames();
+    List<Type> GetAllGames();
 }
