@@ -1,6 +1,6 @@
 ﻿namespace GameCollection.Games.GuessTheNumber;
 
-public class GuessTheNumberController
+public class GuessTheNumberController:IPlayable
 {
     private readonly GuessTheNumber _guessTheNumber;
     private readonly GuessTheNumberView _guessTheNumberView;
@@ -30,5 +30,10 @@ public class GuessTheNumberController
                 _guessTheNumberView.DisplayHint(_guessTheNumber.GetHint(guess));
             }
         }
+    }
+
+    public string getName()
+    {
+        return _name;
     }
 }
