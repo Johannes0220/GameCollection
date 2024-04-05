@@ -19,7 +19,7 @@ namespace GameCollection.Views
             Console.WriteLine("1: Yes");
             Console.WriteLine("2: No");
 
-            var handledInput = ReadNumericInput("Choose the Number:", 1, 2);
+            var handledInput = ReadNumericInput("Choose the Number: ", 1, 2);
             Console.Clear();
             if (handledInput.Equals(1))
             {
@@ -40,14 +40,14 @@ namespace GameCollection.Views
                 Console.WriteLine($"{i}: {users[i].Name}");
             }
 
-            var input = ReadNumericInput("Choose your User:", 0, users.Count-1);
+            var input = ReadNumericInput("Choose your User: ", 0, users.Count-1);
             Console.Clear();
             return users[input];
         }
         private User.User ShowCreateUser()
         {
             Console.WriteLine("Create a new User!");
-            var name = ReadTextInput("What shall your new Users name be?");
+            var name = ReadTextInput("What shall your new Users name be? ");
             Console.Clear();
             Console.WriteLine($"User \"{name}\" was created sucessfully");
             Thread.Sleep(2000);

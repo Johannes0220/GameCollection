@@ -11,6 +11,6 @@ public class GuessTheNumber
 
     public string GetHint(int guess)
     {
-        return guess < value ? "Low" : "High";
+        return guess < value ? "Guess is too Low" : "Guess is too High";
     }
 }
