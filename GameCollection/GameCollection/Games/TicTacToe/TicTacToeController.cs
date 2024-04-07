@@ -7,10 +7,10 @@ public class TicTacToeController:IPlayable
     private readonly string _name = "TicTacToe";
     private readonly Guid _guid = Guid.NewGuid();
 
-    public TicTacToeController(TicTacToe ticTacToe, TicTacToeView ticTacToeView)
+    public TicTacToeController()
     {
-        _ticTacToe = ticTacToe;
-        _ticTacToeView = ticTacToeView;
+        _ticTacToe = new TicTacToe();
+        _ticTacToeView = new TicTacToeView();
     }
 
     public void StartGame()
@@ -26,17 +26,18 @@ public class TicTacToeController:IPlayable
                 if (_ticTacToe.IsWinner(currentPlayer))
                 {
                     _ticTacToeView.PrintBoard(_ticTacToe);
-                    Console.WriteLine($"Player {currentPlayer} wins!");
+                    _ticTacToeView.DisplayWinner(currentPlayer);
                     return;
                 }
                 currentPlayer = (currentPlayer == 'X') ? 'O' : 'X';
             }
             else
             {
-                Console.WriteLine("Invalid move. Try again.");
+                _ticTacToeView.DisplayInvalidMove();
             }
         }
-        Console.WriteLine("It's a tie!");
+
+        _ticTacToeView.DisplayTie();
     }
 
     public string getName()

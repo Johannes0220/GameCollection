@@ -4,6 +4,7 @@ public class TicTacToeView
 {
     public void PrintBoard(TicTacToe ticTacToe)
     {
+        Console.Clear();
         for (int i = 0; i < 3; i++)
         {
             Console.WriteLine("| " + ticTacToe.board[i * 3] + " | " + ticTacToe.board[i * 3 + 1] + " | " + ticTacToe.board[i * 3 + 2] + " |");
@@ -32,5 +33,20 @@ public class TicTacToeView
                 Console.WriteLine("Invalid input. Please enter a number.");
             }
         }
+    }
+
+    public void DisplayInvalidMove()
+    {
+        Console.WriteLine("Invalid move. Try again.");
+    }
+
+    public void DisplayWinner(char winner)
+    {
+        Console.WriteLine($"Player {winner} wins!");
+    }
+
+    public void DisplayTie()
+    {
+        Console.WriteLine("It's a tie!");
     }
 }
