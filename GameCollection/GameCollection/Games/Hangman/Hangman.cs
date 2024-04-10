@@ -1,7 +1,7 @@
 ﻿using GameCollection.Games.Hangman;
 
 namespace GameCollection.Games.Hangman;
-public class HangmanGame
+public class Hangman
 {
     private readonly string[] _wordArray = { "hangman", "game", "rainbow", "game", "street", "germany"};
     private readonly string _randomWord;
@@ -10,7 +10,7 @@ public class HangmanGame
 
     public HangmanGameState State { get; private set; }
 
-    public HangmanGame()
+    public Hangman()
     {
         _randomWord = _wordArray[new Random().Next(_wordArray.Length)].ToLower();
         _revealedChars = new string('_', _randomWord.Length).ToCharArray();

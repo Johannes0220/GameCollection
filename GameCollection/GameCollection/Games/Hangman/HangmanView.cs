@@ -49,4 +49,9 @@ public class HangmanGameView
 			Console.Clear();
         }
     }
+
+    public char GetUserGuess()
+    {
+        return Console.ReadKey().KeyChar;
+    }
 }
