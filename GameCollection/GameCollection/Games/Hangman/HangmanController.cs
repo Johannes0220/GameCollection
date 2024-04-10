@@ -7,6 +7,7 @@ public class HangmanGameController:IPlayable
 {
     private readonly HangmanGame _hangmanGame;
     private readonly HangmanGameView _hangmanView;
+    private readonly HangmanRenders _hangmanRenders;
     private readonly string _name = "Hangman";
     private readonly Guid _guid = Guid.NewGuid();
 
@@ -14,6 +15,7 @@ public class HangmanGameController:IPlayable
     {
         _hangmanGame = new HangmanGame();
         _hangmanView = new HangmanGameView();
+        _hangmanRenders = new HangmanRenders();
     }
 
     public void StartGame()
@@ -24,14 +26,13 @@ public class HangmanGameController:IPlayable
             HangmanGameState state = _hangmanGame.State;
             int incorrectGuesses = _hangmanGame._incorrectGuesses;
 
-            _hangmanView.RenderGameState(currentWord, state, incorrectGuesses);
+            _hangmanView.RenderGameState(currentWord, state, incorrectGuesses, _hangmanRenders);
 
-            Console.WriteLine("Enter your guess (a-z):");
             char guess = Console.ReadKey().KeyChar;
             _hangmanGame.Guess(guess);
         }
 
-        _hangmanView.RenderGameState(_hangmanGame.GetRevealedWord(), _hangmanGame.State, _hangmanGame._incorrectGuesses);
+        _hangmanView.RenderGameState(_hangmanGame.GetRevealedWord(), _hangmanGame.State, _hangmanGame._incorrectGuesses, _hangmanRenders);
     }
 
     public string getName()
