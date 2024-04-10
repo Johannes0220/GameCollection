@@ -6,7 +6,7 @@ namespace GameCollection.Games.Hangman;
 public class HangmanGameController:IPlayable
 {
     private readonly Hangman _hangman;
-    private readonly HangmanGameView _hangmanView;
+    private readonly HangmanView _hangmanView;
     private readonly HangmanRenders _hangmanRenders;
     private readonly string _name = "Hangman";
     private readonly Guid _guid = Guid.NewGuid();
@@ -14,7 +14,7 @@ public class HangmanGameController:IPlayable
     public HangmanGameController()
     {
         _hangman = new Hangman();
-        _hangmanView = new HangmanGameView();
+        _hangmanView = new HangmanView();
         _hangmanRenders = new HangmanRenders();
     }
 
@@ -25,13 +25,25 @@ public class HangmanGameController:IPlayable
             string currentWord = _hangman.GetRevealedWord();
             HangmanGameState state = _hangman.State;
             int incorrectGuesses = _hangman._incorrectGuesses;
-
-            _hangmanView.RenderGameState(currentWord, state, incorrectGuesses, _hangmanRenders);
+            _hangmanView.GameStates(currentWord, incorrectGuesses);
+            _hangmanView.DisplayLinesForGuess(incorrectGuesses, _hangmanRenders);
+            
             var guess = _hangmanView.GetUserGuess();
             _hangman.Guess(guess);
         }
 
-        _hangmanView.RenderGameState(_hangman.GetRevealedWord(), _hangman.State, _hangman._incorrectGuesses, _hangmanRenders);
+        string randomWord = _hangman.GetRandomWord();
+
+        switch (_hangman.State)
+        {
+            case HangmanGameState.Won:
+                _hangmanView.DisplayWinMessage(randomWord);
+                break;
+            case HangmanGameState.Lost:
+                _hangmanView.DisplayDeathAnimation(_hangmanRenders);
+                _hangmanView.DisplayLossMessage();
+                break;
+        }
     }
 
     public string getName()

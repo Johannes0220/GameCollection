@@ -7,7 +7,6 @@ public class Hangman
     private readonly string _randomWord;
     private readonly char[] _revealedChars;
     public int _incorrectGuesses;
-
     public HangmanGameState State { get; private set; }
 
     public Hangman()
@@ -41,5 +40,10 @@ public class Hangman
     public string GetRevealedWord()
     {
         return new string(_revealedChars);
+    }
+
+    public string GetRandomWord()
+    {
+        return new string(_randomWord);
     }
 }
