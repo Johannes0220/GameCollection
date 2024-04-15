@@ -33,23 +33,22 @@ public class Game2048Controller:IPlayable
                     _game2048View.GameOver();
                     break;
                 }
-                Console.WriteLine(_game.IsGameOver());
 
                 var key = Console.ReadKey(true).Key;
-                Direction direction;
+                Game2048Direction direction;
                 switch (key)
                 {
                     case ConsoleKey.UpArrow:
-                        direction = Direction.Up;
+                        direction = Game2048Direction.Up;
                         break;
                     case ConsoleKey.DownArrow:
-                        direction = Direction.Down;
+                        direction = Game2048Direction.Down;
                         break;
                     case ConsoleKey.LeftArrow:
-                        direction = Direction.Left;
+                        direction = Game2048Direction.Left;
                         break;
                     case ConsoleKey.RightArrow:
-                        direction = Direction.Right;
+                        direction = Game2048Direction.Right;
                         break;
                     case ConsoleKey.Escape:
                         _game2048View.Close();

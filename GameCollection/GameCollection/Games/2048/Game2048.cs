@@ -20,13 +20,13 @@ public class Game2048
 
     public bool IsGameOver()
     {
-        return !TryUpdate((int?[,])board.Clone(), ref score, Direction.Up) &&
-               !TryUpdate((int?[,])board.Clone(), ref score, Direction.Down) &&
-               !TryUpdate((int?[,])board.Clone(), ref score, Direction.Left) &&
-               !TryUpdate((int?[,])board.Clone(), ref score, Direction.Right);
+        return !TryUpdate((int?[,])board.Clone(), ref score, Game2048Direction.Up) &&
+               !TryUpdate((int?[,])board.Clone(), ref score, Game2048Direction.Down) &&
+               !TryUpdate((int?[,])board.Clone(), ref score, Game2048Direction.Left) &&
+               !TryUpdate((int?[,])board.Clone(), ref score, Game2048Direction.Right);
     }
 
-    public bool TryMove(Direction direction)
+    public bool TryMove(Game2048Direction direction)
     {
         return (TryUpdate(board, ref score, direction));
     }
@@ -58,7 +58,7 @@ public class Game2048
         return emptyTiles;
     }
 
-    private bool TryUpdate(int?[,] board, ref int score, Direction direction)
+    private bool TryUpdate(int?[,] board, ref int score, Game2048Direction direction)
     {
         bool update = false;
         bool[,] locked = new bool[board.GetLength(0), board.GetLength(1)];
@@ -107,26 +107,26 @@ public class Game2048
         return update;
     }
 
-    private (int, int) Adjacent(int x, int y, Direction direction)
+    private (int, int) Adjacent(int x, int y, Game2048Direction direction)
     {
         return direction switch
         {
-            Direction.Up => (x + 1, y),
-            Direction.Down => (x - 1, y),
-            Direction.Left => (x, y - 1),
-            Direction.Right => (x, y + 1),
+            Game2048Direction.Up => (x + 1, y),
+            Game2048Direction.Down => (x - 1, y),
+            Game2048Direction.Left => (x, y - 1),
+            Game2048Direction.Right => (x, y + 1),
             _ => throw new NotImplementedException(),
         };
     }
 
-    private (int, int) Map(int x, int y, Direction direction)
+    private (int, int) Map(int x, int y, Game2048Direction direction)
     {
         return direction switch
         {
-            Direction.Up => (board.GetLength(0) - x - 1, y),
-            Direction.Down => (x, y),
-            Direction.Left => (x, y),
-            Direction.Right => (x, board.GetLength(1) - y - 1),
+            Game2048Direction.Up => (board.GetLength(0) - x - 1, y),
+            Game2048Direction.Down => (x, y),
+            Game2048Direction.Left => (x, y),
+            Game2048Direction.Right => (x, board.GetLength(1) - y - 1),
             _ => throw new NotImplementedException(),
         };
     }

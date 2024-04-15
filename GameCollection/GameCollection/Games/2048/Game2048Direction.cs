@@ -1,6 +1,6 @@
 ﻿namespace GameCollection.Games._2048;
 
-public enum Direction
+public enum Game2048Direction
 {
     Up = 1,
     Down = 2,
