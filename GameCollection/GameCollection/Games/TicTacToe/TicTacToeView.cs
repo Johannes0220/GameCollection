@@ -5,10 +5,20 @@ public class TicTacToeView
     public void PrintBoard(TicTacToe ticTacToe)
     {
         Console.Clear();
+        Console.WriteLine("╔===========╗");
         for (int i = 0; i < 3; i++)
         {
-            Console.WriteLine("| " + ticTacToe.board[i * 3] + " | " + ticTacToe.board[i * 3 + 1] + " | " + ticTacToe.board[i * 3 + 2] + " |");
+            Console.WriteLine("║ " + ticTacToe.board[i * 3] + " ║ " + ticTacToe.board[i * 3 + 1] + " ║ " + ticTacToe.board[i * 3 + 2] + " ║");
+            if (i == 2)
+            {
+                break;
+            }
+            else
+            {
+                Console.WriteLine("║===========║");
+            }
         }
+        Console.WriteLine("╚===========╝");
     }
 
     public int GetPlayerMove(char player)
