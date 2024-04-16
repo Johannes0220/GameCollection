@@ -83,6 +83,12 @@ public class Game2048View
         }
     }
 
+    public void ClearConsole()
+    {
+        Console.CursorVisible = false;
+        Console.Clear();
+    }
+
     public void Close()
     {
         Console.Clear();
@@ -90,5 +96,4 @@ public class Game2048View
         Console.CursorVisible = true;
         Environment.Exit(0);
     }
-
 }

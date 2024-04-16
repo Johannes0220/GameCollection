@@ -17,53 +17,48 @@ public class Game2048Controller:IPlayable
 
     public void StartGame()
     {
-        Console.CursorVisible = false;
-
+        _game.GenerateNewTile();
         while (true)
         {
-            Console.Clear();
-            _game.GenerateNewTile();
-            while (true)
+            _game2048View.ClearConsole();
+            _game2048View.Render(_game.GetBoard(), _game.GetScore());
+
+            if (_game.IsGameOver())
             {
-                Console.Clear();
-                _game2048View.Render(_game.GetBoard(), _game.GetScore());
-
-                if (_game.IsGameOver())
-                {
-                    _game2048View.GameOver();
-                    break;
-                }
-
-                var key = Console.ReadKey(true).Key;
-                Game2048Direction direction;
-                switch (key)
-                {
-                    case ConsoleKey.UpArrow:
-                        direction = Game2048Direction.Up;
-                        break;
-                    case ConsoleKey.DownArrow:
-                        direction = Game2048Direction.Down;
-                        break;
-                    case ConsoleKey.LeftArrow:
-                        direction = Game2048Direction.Left;
-                        break;
-                    case ConsoleKey.RightArrow:
-                        direction = Game2048Direction.Right;
-                        break;
-                    case ConsoleKey.Escape:
-                        _game2048View.Close();
-                        return;
-                    default:
-                        continue;
-                }
-
-                if (_game.TryMove(direction))
-                    _game.GenerateNewTile();
-
+                _game2048View.GameOver();
+                break;
             }
-            Thread.Sleep(2000);
-            _game2048View.Close();
+
+            var key = Console.ReadKey(true).Key;
+            //var key = _game2048View.GetKey();
+            Game2048Direction direction;
+            switch (key)
+            {
+                case ConsoleKey.UpArrow:
+                    direction = Game2048Direction.Up;
+                    break;
+                case ConsoleKey.DownArrow:
+                    direction = Game2048Direction.Down;
+                    break;
+                case ConsoleKey.LeftArrow:
+                    direction = Game2048Direction.Left;
+                    break;
+                case ConsoleKey.RightArrow:
+                    direction = Game2048Direction.Right;
+                    break;
+                case ConsoleKey.Escape:
+                    _game2048View.Close();
+                    return;
+                default:
+                    continue;
+            }
+
+            if (_game.TryMove(direction)){}
+                _game.GenerateNewTile();
+
         }
+        Thread.Sleep(2000);
+        _game2048View.Close();
     }
 
     public string getName()
