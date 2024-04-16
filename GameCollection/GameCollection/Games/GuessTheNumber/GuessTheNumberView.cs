@@ -2,6 +2,8 @@
 
 public class GuessTheNumberView
 {
+    private readonly int _delayMainMenu = 3000;
+
     public int AskPlayerGuess()
     {
         Console.WriteLine("Guess a number between 1-100: ");
@@ -18,10 +20,15 @@ public class GuessTheNumberView
     public void DisplayRight()
     {
         Console.WriteLine("You guessed it right!");
+        Console.WriteLine("You will be redirected to the game selection in 3 seconds");
+        Thread.Sleep(_delayMainMenu);
+        Console.Clear();
     }
-    public void DisplayWrong()
+
+    public void DisplayWrong(int guess)
     {
-        Console.WriteLine("Incorrect. Try again!");
+        Console.Clear();
+        Console.WriteLine($"{guess} is incorrect. Try again!");
     }
 
     public void DisplayHint(string hint)

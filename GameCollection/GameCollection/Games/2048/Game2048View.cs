@@ -4,6 +4,8 @@ namespace GameCollection.Games._2048;
 
 public class Game2048View
 {
+    private readonly int _delayMainMenu = 3000;
+
     public void Render(int?[,] board, int score)
     {
         int horizontal = board.GetLength(0) * 8;
@@ -64,24 +66,12 @@ public class Game2048View
     public void GameOver()
     {
         Console.Clear();
-        Console.WriteLine("Game Over...");
-        Console.WriteLine();
-        Console.WriteLine("Play Again [enter], or quit [escape]?");
-        while (true)
-        {
-            var key = Console.ReadKey(true).Key;
-            switch (key)
-            {
-                case ConsoleKey.Enter:
-                    return;
-                case ConsoleKey.Escape:
-                    Close();
-                    return;
-                default:
-                    continue;
-            }
+        Console.WriteLine(" ");
+        Console.WriteLine("Gameover...");
+        Console.WriteLine("You will be redirected to the game selection in 3 seconds");
+        Thread.Sleep(_delayMainMenu);
+        Console.Clear();
         }
-    }
 
     public void ClearConsole()
     {
@@ -93,7 +83,8 @@ public class Game2048View
     {
         Console.Clear();
         Console.WriteLine("2048 was closed.");
+        Thread.Sleep(_delayMainMenu);
         Console.CursorVisible = true;
-        Environment.Exit(0);
+        Console.Clear();
     }
 }

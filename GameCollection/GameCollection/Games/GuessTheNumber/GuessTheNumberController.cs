@@ -28,11 +28,10 @@ public class GuessTheNumberController:IPlayable
             if (_guessTheNumber.CheckGuess(guess))
             {
                 _guessTheNumberView.DisplayRight();
-                _guessTheNumberView.DisplayExitMessage();
             }
             else
             {
-                _guessTheNumberView.DisplayWrong();
+                _guessTheNumberView.DisplayWrong(guess);
                 _guessTheNumberView.DisplayHint(_guessTheNumber.GetHint(guess));
             }
         }

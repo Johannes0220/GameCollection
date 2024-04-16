@@ -55,10 +55,7 @@ public class Game2048Controller:IPlayable
 
             if (_game.TryMove(direction)){}
                 _game.GenerateNewTile();
-
         }
-        Thread.Sleep(2000);
-        _game2048View.Close();
     }
 
     public string getName()
