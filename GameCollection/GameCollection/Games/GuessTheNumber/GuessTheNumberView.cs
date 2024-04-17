@@ -19,10 +19,12 @@ public class GuessTheNumberView
 
     public void DisplayRight()
     {
+        Console.CursorVisible = false;
         Console.WriteLine("You guessed it right!");
         Console.WriteLine("You will be redirected to the game selection in 3 seconds");
         Thread.Sleep(_delayMainMenu);
         Console.Clear();
+        Console.CursorVisible = true;
     }
 
     public void DisplayWrong(int guess)

@@ -24,18 +24,22 @@ public class HangmanView
 
     public void DisplayWinMessage(string randomWord)
     {
+        Console.CursorVisible = false;
         Console.WriteLine(" ");
         Console.WriteLine($"Congratulations the word is '{randomWord}'! You won!");
         Console.WriteLine("You will be redirected to the game selection in 3 seconds");
         Thread.Sleep(_delayMainMenu);
         Console.Clear();
+        Console.CursorVisible = true;
     }
 
     public void DisplayDeathAnimation(HangmanRenders renders)
     {
+        Console.CursorVisible = false;
         Console.Clear();
         foreach (var frame in renders.DeathAnimation)
         {
+            Console.WriteLine(" ");
             Console.WriteLine(frame);
             Thread.Sleep(_delayDeathAnimation);
             Console.Clear();
@@ -50,6 +54,7 @@ public class HangmanView
         Console.WriteLine("You will be redirected to the game selection in 3 seconds");
         Thread.Sleep(_delayMainMenu);
         Console.Clear();
+        Console.CursorVisible = true;
     }
 
     public char GetUserGuess()

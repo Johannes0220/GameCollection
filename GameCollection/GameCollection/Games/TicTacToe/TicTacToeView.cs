@@ -2,6 +2,8 @@
 
 public class TicTacToeView
 {
+    private readonly int _delayMainMenu = 3000;
+
     public void PrintBoard(TicTacToe ticTacToe)
     {
         Console.Clear();
@@ -52,11 +54,21 @@ public class TicTacToeView
 
     public void DisplayWinner(char winner)
     {
+        Console.CursorVisible = false;
         Console.WriteLine($"Player {winner} wins!");
+        Console.WriteLine("You will be redirected to the game selection in 3 seconds");
+        Thread.Sleep(_delayMainMenu);
+        Console.Clear();
+        Console.CursorVisible = true;
     }
 
     public void DisplayTie()
     {
+        Console.CursorVisible = false;
         Console.WriteLine("It's a tie!");
+        Console.WriteLine("You will be redirected to the game selection in 3 seconds");
+        Thread.Sleep(_delayMainMenu);
+        Console.Clear();
+        Console.CursorVisible = true;
     }
 }
