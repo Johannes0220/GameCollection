@@ -47,9 +47,9 @@ public class Snake
     {
         if (Console.WindowWidth != width || Console.WindowHeight != height)
         {
-            new SnakeView().ResizeMessage();
             return true;
         }
+
         return false;
     }
 
@@ -64,8 +64,6 @@ public class Snake
 
         if (X < 0 || X >= width || Y < 0 || Y >= height)
         {
-            Console.Clear();
-            new SnakeView().GameOver(snake.Count - 1);
             return true;
         }
 
@@ -122,5 +120,10 @@ public class Snake
     {
         int Y = snake.Peek().Y;
         return Y;
+    }
+
+    public int GetSnakeLength()
+    {
+        return snake.Count - 1;
     }
 }

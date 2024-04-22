@@ -29,8 +29,12 @@ public class SnakeController:IPlayable
 
         while (!_snake.GameOver() && !closeRequested)
         {
+            int X = _snake.GetX();
+            int Y = _snake.GetY();
+
             if (_snake.CheckWindowResize())
             {
+                _snakeView.ResizeMessage();
                 return;
             }
 
@@ -64,9 +68,6 @@ public class SnakeController:IPlayable
                 }
             }
 
-            int X = _snake.GetX();
-            int Y = _snake.GetY();
-
             switch (direction)
             {
                 case SnakeDirection.Up:
@@ -85,6 +86,7 @@ public class SnakeController:IPlayable
 
             if (_snake.CheckCollision(X, Y))
             {
+                _snakeView.GameOver(_snake.GetSnakeLength());
                 break;
             }
 
