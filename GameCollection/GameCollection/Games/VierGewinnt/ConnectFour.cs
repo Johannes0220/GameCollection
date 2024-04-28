@@ -6,63 +6,57 @@ public class ConnectFour
 {
     Exception? exception = null;
 
-    public bool?[,] board;
+    public Board board { get; set; }
     public bool player1Turn { get; set; }
-    (int I, int J) move = default;
+    (int column, int row) move = default;
     public void InitGame()
     {
         player1Turn = true;
-        board = new bool?[7, 6];
-        ResetBoard();
+        board = new Board();
+        board.InitBoard();
     }
 
 
+    //TODO: Adjust Code to Board-Type
+    //TODO: Make BlockBot work
+    //TODO: Test Difficulty Choose & Block Bot
 
-    public void ResetBoard()
-    {
-        for (int i = 0; i < board.GetLength(0); i++)
-        {
-            for (int j = 0; j < board.GetLength(1); j++)
-            {
-                board[i, j] = null;
-            }
-        }
-    }
+
 
     public bool CheckFor4()
     {
-        bool player = board[move.I, move.J]!.Value;
+        bool player = board.board[move.column, move.row]!.Value;
         { // horizontal
             int inARow = 0;
-            for (int _i = 0; _i < board.GetLength(0); _i++)
+            for (int _column = 0; _column < board.width; _column++)
             {
-                inARow = board[_i, move.J] == player ? inARow + 1 : 0;
+                inARow = board.board[_column, move.row] == player ? inARow + 1 : 0;
                 if (inARow >= 4) return true;
             }
         }
         { // vertical
             int inARow = 0;
-            for (int _j = 0; _j < board.GetLength(1); _j++)
+            for (int _row = 0; _row < board.height; _row++)
             {
-                inARow = board[move.I, _j] == player ? inARow + 1 : 0;
+                inARow = board.board[move.column, _row] == player ? inARow + 1 : 0;
                 if (inARow >= 4) return true;
             }
         }
         { // postive slope diagonal
             int inARow = 0;
-            int min = Math.Min(move.I, move.J);
-            for (int _i = move.I - min, _j = move.J - min; _i < board.GetLength(0) && _j < board.GetLength(1); _i++, _j++)
+            int min = Math.Min(move.column, move.row);
+            for (int _column = move.column - min, _row = move.row - min; _column < board.width && _row < board.height; _column++, _row++)
             {
-                inARow = board[_i, _j] == player ? inARow + 1 : 0;
+                inARow = board.board[_column, _row] == player ? inARow + 1 : 0;
                 if (inARow >= 4) return true;
             }
         }
         { // negative slope diagonal
             int inARow = 0;
-            int offset = Math.Min(move.I, board.GetLength(1) - (move.J + 1));
-            for (int _i = move.I - offset, _j = move.J + offset; _i < board.GetLength(0) && _j >= 0; _i++, _j--)
+            int offset = Math.Min(move.column, board.height - (move.row + 1));
+            for (int _column = move.column - offset, _row = move.row + offset; _column < board.width && _row >= 0; _column++, _row--)
             {
-                inARow = board[_i, _j] == player ? inARow + 1 : 0;
+                inARow = board.board[_column, _row] == player ? inARow + 1 : 0;
                 if (inARow >= 4) return true;
             }
         }
@@ -71,9 +65,9 @@ public class ConnectFour
 
     public bool CheckForDraw()
     {
-        for (int i = 0; i < board.GetLength(0); i++)
+        for (int column = 0; column < board.width; column++)
         {
-            if (!board[i, board.GetLength(1) - 1].HasValue)
+            if (!board.board[column, board.height - 1].HasValue)
             {
                 return false;
             }
@@ -81,17 +75,11 @@ public class ConnectFour
         return true;
     }
 
-    public void SetInput(int i)
+    public void SetInput(int column)
     {
-        for (int j = board.GetLength(1) - 1; ; j--)
-        {
-            if (j is 0 || board[i, j - 1].HasValue)
-            {
-                board[i, j] = player1Turn;
-                move = (i, j);
-                break;
-            }
-        }
+        var row=board.GetFillStateColumn(column);
+        move = (column, row);
+        board.board[column, row] = player1Turn;
     }
 
     public void SwitchPlayer()

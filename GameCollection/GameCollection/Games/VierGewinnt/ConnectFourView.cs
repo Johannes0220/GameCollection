@@ -1,43 +1,45 @@
-﻿namespace GameCollection.Games.VierGewinnt;
+﻿using GameCollection.Views;
 
-public class ConnectFourView
+namespace GameCollection.Games.VierGewinnt;
+
+public class ConnectFourView: BasicView
 {
     public const int moveMinI = 5;
     public const int moveJ = 2;
-    public void RenderBoard(bool?[,] board)
+    public void RenderBoard(Board board)
     {
         Console.Clear();
         Console.WriteLine();
         Console.WriteLine();
         Console.WriteLine();
-        Console.WriteLine("   ╔" + new string('-', board.GetLength(0) * 2 + 1) + "╗");
+        Console.WriteLine("   ╔" + new string('-', board.width * 2 + 1) + "╗");
         Console.Write("   ║ ");
         int iOffset = Console.CursorLeft;
         int jOffset = Console.CursorTop;
-        Console.WriteLine(new string(' ', board.GetLength(0) * 2) + "║");
+        Console.WriteLine(new string(' ', board.width * 2) + "║");
 
-        for (int j = 1; j < board.GetLength(1) * 2; j++)
+        for (int j = 1; j < board.height * 2; j++)
         {
-            Console.WriteLine("   ║" + new string(' ', board.GetLength(0) * 2 + 1) + "║");
+            Console.WriteLine("   ║" + new string(' ', board.width * 2 + 1) + "║");
         }
 
-        Console.WriteLine("   ╚" + new string('═', board.GetLength(0) * 2 + 1) + "╝");
+        Console.WriteLine("   ╚" + new string('═', board.width * 2 + 1) + "╝");
 
         int iFinal = Console.CursorLeft;
         int jFinal = Console.CursorTop;
 
-        for (int i = 0; i < board.GetLength(0); i++)
+        for (int i = 0; i < board.width; i++)
         {
-            for (int j = 0; j < board.GetLength(1); j++)
+            for (int j = 0; j < board.height; j++)
             {
-                Console.SetCursorPosition(i * 2 + iOffset, (board.GetLength(1) - j) * 2 + jOffset - 1);
-                if (board[i, j] == true)
+                Console.SetCursorPosition(i * 2 + iOffset, (board.height - j) * 2 + jOffset - 1);
+                if (board.board[i, j] == true)
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.Write('█');
                     Console.ResetColor();
                 }
-                else if (board[i, j] == false)
+                else if (board.board[i, j] == false)
                 {
                     Console.ForegroundColor = ConsoleColor.Blue;
                     Console.Write('█');
@@ -53,7 +55,7 @@ public class ConnectFourView
         Console.SetCursorPosition(iFinal, jFinal);
     }
 
-    public int GetPlayerInput(bool?[,] board)
+    public int GetPlayerInput(Board board)
     {
         int i = 0;
         Console.SetCursorPosition(moveMinI, moveJ);
@@ -73,7 +75,7 @@ public class ConnectFourView
                 case ConsoleKey.RightArrow:
                     Console.SetCursorPosition(i * 2 + moveMinI, moveJ);
                     Console.Write(' ');
-                    i = Math.Min(board.GetLength(0) - 1, i + 1);
+                    i = Math.Min(board.width - 1, i + 1);
                     Console.SetCursorPosition(i * 2 + moveMinI, moveJ);
                     Console.Write('v');
                     break;
@@ -81,7 +83,7 @@ public class ConnectFourView
             input=Console.ReadKey(true).Key;
         }
 
-        if (board[i, board.GetLength(1) - 1] != null)
+        if (board.board[i, board.height - 1] != null)
         {
             GetPlayerInput(board);
         }
@@ -111,5 +113,18 @@ public class ConnectFourView
     public void DisplayReturnToGameMenu()
     {
         Console.WriteLine("   Exiting Game!!!");
+    }
+
+    public int GetDifficulty()
+    {
+        Console.WriteLine("Choose a Difficulty");
+        Console.WriteLine("0: Easy");
+        Console.WriteLine("1: Medium");
+        return ReadNumericInput("", 0, 1);
+    }
+
+    public override object Show()
+    {
+        throw new NotImplementedException();
     }
 }

@@ -2,5 +2,5 @@
 
 public interface IConnectFourBot
 {
-    int getMove(bool?[,] board);
+    int getMove(Board board, int move);
 }
