@@ -33,11 +33,13 @@ namespace GameCollection.Controller
                     var activeGame = (IPlayable)Activator.CreateInstance(game);
                     activeGame.StartGame();
                 }
-                catch
+                catch(Exception e)
                 {
                     var ex=new Exception(
                         "Something went wrong with this game! Please contact the developers to fix the issue");
                     Console.WriteLine(ex);
+                    Console.WriteLine(e.Message);
+                    Console.WriteLine(e.StackTrace);
                 }
             }
 

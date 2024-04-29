@@ -30,7 +30,7 @@ public class ConnectFourController : IPlayable
             }
             else
             {
-                //_bot = new ConnectFourBlockBot();
+                _bot = new ConnectFourBlockBot();
             }
 
             _ConnectFour.InitGame();
