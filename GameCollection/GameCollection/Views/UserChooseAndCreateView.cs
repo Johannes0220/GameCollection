@@ -13,7 +13,7 @@ namespace GameCollection.Views
             _userRepository = userRepository;
         }
 
-        public override User.User Show()
+        public User.User Show()
         {
             Console.WriteLine("Have you played Before?");
             Console.WriteLine("1: Yes");

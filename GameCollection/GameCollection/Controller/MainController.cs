@@ -13,11 +13,13 @@ namespace GameCollection.Controller
     {
         private readonly IGameRepository _gameRepository;
         private readonly UserRepository _userRepository;
+        private readonly ArchivmentController _archivmentController;
 
-        public MainController(IGameRepository gameRepository, UserRepository userRepository)
+        public MainController(IGameRepository gameRepository, UserRepository userRepository, ArchivmentController archivmentController)
         {
             _gameRepository = gameRepository;
             _userRepository = userRepository;
+            _archivmentController = archivmentController;
         }
 
         public void RunGameCollection()
@@ -26,20 +28,46 @@ namespace GameCollection.Controller
             var user = userView.Show();
             while (true)
             {
-                var gameChooserView = new GameChooserView(_gameRepository);
-                var game = gameChooserView.Show();
-                try
+                var mainView = new MainMenuView();
+                var menu=mainView.ShowMainMenu();
+                if (menu == 0)
                 {
-                    var activeGame = (IPlayable)Activator.CreateInstance(game);
-                    activeGame.StartGame();
+
+                    var gameChooserView = new GameChooserView(_gameRepository);
+                    var game = gameChooserView.Show();
+                    _archivmentController.RunArchivmentsForGame(game, user);
+                    try
+                    {
+                        var activeGame = (IPlayable)Activator.CreateInstance(game);
+                        user.GetArchivments(activeGame.GetType());
+                        activeGame.StartGame();
+                        _archivmentController.UpdateArchivmentsForGame(game, user);
+                    }
+                    catch (Exception e)
+                    {
+                        var ex = new Exception(
+                            "Something went wrong with this game! Please contact the developers to fix the issue");
+                        Console.WriteLine(ex);
+                        Console.WriteLine(e.Message);
+                        Console.WriteLine(e.StackTrace);
+                    }
                 }
-                catch(Exception e)
+                else
                 {
-                    var ex=new Exception(
-                        "Something went wrong with this game! Please contact the developers to fix the issue");
-                    Console.WriteLine(ex);
-                    Console.WriteLine(e.Message);
-                    Console.WriteLine(e.StackTrace);
+                    var archivmentView = new ArchivmentView();
+                    var gameList=_gameRepository.GetAllGames();
+                    var game=archivmentView.ChooseGame(gameList);
+                    try
+                    {
+                        var archivments = user.GetArchivments(game);
+                        archivmentView.ShowArchivementsForGame(archivments, game);
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine("It seems like you have not played this game yet!");
+                        Console.WriteLine("Press Enter to retrun to the main menu");
+                        Console.ReadLine();
+                    }
                 }
             }
 

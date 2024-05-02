@@ -20,7 +20,7 @@ namespace GameCollection.Views
         }
 
 
-        public override Type Show()
+        public Type Show()
         {
             Console.WriteLine("Choose the game you'd like to play!");
 

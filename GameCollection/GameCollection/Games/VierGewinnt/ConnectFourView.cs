@@ -122,9 +122,4 @@ public class ConnectFourView: BasicView
         Console.WriteLine("1: Medium");
         return ReadNumericInput("", 0, 1);
     }
-
-    public override object Show()
-    {
-        throw new NotImplementedException();
-    }
 }

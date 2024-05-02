@@ -133,8 +133,5 @@ public class TowerOfHanoiView : BasicView
             Console.Write(new string(' ', disks - disk.Value));
         }
     }
-    public override object Show()
-    {
-        throw new NotImplementedException();
-    }
+
 }

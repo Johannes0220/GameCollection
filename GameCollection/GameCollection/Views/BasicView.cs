@@ -4,8 +4,6 @@ namespace GameCollection.Views;
 
 public abstract class BasicView
 {
-    public abstract object Show();
-
     protected bool HandleNumericInput(string input, int lowerBound, int upperBound)
     {
         var inputNum = 0;

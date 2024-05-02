@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace GameCollection.Archivements
 {
-    internal interface IArchivable
+    public interface IArchivable
     {
+        string Name { get; }
+        int Level { get; }
+        void GetScore();
+
     }
 }
