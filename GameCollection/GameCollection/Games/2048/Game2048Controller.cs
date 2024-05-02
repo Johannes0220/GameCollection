@@ -58,7 +58,7 @@ public class Game2048Controller:IPlayable
         }
     }
 
-    public string getName()
+    public string GetName()
     {
         return _name;
     }

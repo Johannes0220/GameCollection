@@ -14,7 +14,7 @@ public class ConnectFourController : IPlayable
         _ConnectFourView = new ConnectFourView();
         _ConnectFour = new ConnectFour();
     }
-    public string getName()
+    public string GetName()
     {
         throw new NotImplementedException();
     }

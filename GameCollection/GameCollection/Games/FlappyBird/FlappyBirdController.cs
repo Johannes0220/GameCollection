@@ -70,7 +70,7 @@ public class FlappyBirdController : IPlayable
         }
     }
 
-    public string getName()
+    public string GetName()
     {
         return _name;
     }

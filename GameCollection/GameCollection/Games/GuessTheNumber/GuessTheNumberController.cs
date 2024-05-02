@@ -37,7 +37,7 @@ public class GuessTheNumberController:IPlayable
         }
     }
 
-    public string getName()
+    public string GetName()
     {
         return _name;
     }

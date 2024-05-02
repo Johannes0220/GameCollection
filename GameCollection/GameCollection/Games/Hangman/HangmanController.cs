@@ -46,7 +46,7 @@ public class HangmanGameController:IPlayable
         }
     }
 
-    public string getName()
+    public string GetName()
     {
         return _name;
     }

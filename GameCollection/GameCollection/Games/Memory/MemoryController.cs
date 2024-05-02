@@ -17,7 +17,7 @@ public class MemoryController : IPlayable
         _memoryView = new MemoryView();
         _memory = new Memory();
     }
-    public string getName()
+    public string GetName()
     {
         throw new NotImplementedException();
     }

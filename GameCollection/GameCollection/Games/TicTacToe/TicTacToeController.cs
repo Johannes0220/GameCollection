@@ -40,7 +40,7 @@ public class TicTacToeController:IPlayable
         _ticTacToeView.DisplayTie();
     }
 
-    public string getName()
+    public string GetName()
     {
         return _name;
     }

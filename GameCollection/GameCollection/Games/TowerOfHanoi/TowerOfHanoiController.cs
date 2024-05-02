@@ -15,7 +15,7 @@ public class TowerOfHanoiController :IPlayable
         _towerOfHanoi=new TowerOfHanoi();
         _towerOfHanoiView=new TowerOfHanoiView();
     }
-    public string getName()
+    public string GetName()
     {
         throw new NotImplementedException();
     }

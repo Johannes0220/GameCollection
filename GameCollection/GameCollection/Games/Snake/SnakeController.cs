@@ -98,7 +98,7 @@ public class SnakeController:IPlayable
         }
     }
 
-    public string getName()
+    public string GetName()
     {
         return _name;
     }
