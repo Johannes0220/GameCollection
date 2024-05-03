@@ -21,4 +21,10 @@
     <ProjectReference Include="..\Utils\Utils.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Games\" />
+    <Folder Include="Controller\" />
+    <Folder Include="User\" />
+  </ItemGroup>
+
 </Project>

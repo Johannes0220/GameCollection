@@ -1,3 +1,4 @@
+using System.Reflection;
 using System.Text;
 
 using GameCollection.User;
@@ -9,7 +10,8 @@ namespace Test
     [TestClass]
     public class UserRepositoryTest
     {
-        private FileInfo testUserFile = new FileInfo("D:\\Test\\User.json");
+        private static readonly DirectoryInfo _rootPath = new(Environment.CurrentDirectory);
+        private FileInfo testUserFile = new FileInfo(Path.Combine(_rootPath.FullName,"\\Test\\User.json"));
 
 
         [TestMethod]
@@ -45,8 +47,9 @@ namespace Test
             file.Close();
             var guid = Guid.NewGuid();
             var name = "someName";
-            var user = new User(guid,name);
-            var users = new List<User>(new User[] { user });
+            var user = new GameCollection.User.User(guid,name);
+            var users = new Dictionary<Guid,GameCollection.User.User>();
+            users.Add(user.Id, user);
             var writer = new StringWriter();
             var serializer=new JsonSerializer();
             serializer.Serialize(writer,users);
