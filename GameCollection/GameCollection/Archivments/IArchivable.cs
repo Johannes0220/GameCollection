@@ -10,7 +10,7 @@ namespace GameCollection.Archivements
     {
         string Name { get; }
         int Level { get; }
-        void GetScore();
+        IArchivmentScore GetScore();
 
     }
 }

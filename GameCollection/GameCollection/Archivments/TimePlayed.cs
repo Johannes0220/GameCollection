@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using GameCollection.Games;
 
 namespace GameCollection.Archivements;
 
@@ -6,7 +7,8 @@ public class TimePlayed: IArchivable, ITrackable
 {
     private readonly Dictionary<int,TimeSpan>_archivmentSteps;
     private readonly TimeSpan _timePlayed;
-    private DateTime _startTracking; 
+    private DateTime _startTracking;
+    
 
     public TimePlayed()
     {
@@ -54,8 +56,8 @@ public class TimePlayed: IArchivable, ITrackable
 
     public string Name { get; }
     public int Level { get; }
-    public void GetScore()
+    public IArchivmentScore GetScore()
     {
-        throw new NotImplementedException();
+        return new TimeScore(_timePlayed);
     }
 }
