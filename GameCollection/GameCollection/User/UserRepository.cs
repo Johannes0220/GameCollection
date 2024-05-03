@@ -1,12 +1,14 @@
 ﻿using System.Collections;
+using System.Net;
 using System.Text;
 using System.Text.Json;
+using GameCollection.Archivements;
 using Utils;
 
 
 namespace GameCollection.User
 {
-    public class UserRepository
+    public class UserRepository : IUserRepository
     {
         private readonly FileInfo _userFile;
         private readonly ICustomJsonSerializer _jsonSerializer;
@@ -34,14 +36,6 @@ namespace GameCollection.User
         {
 
             var user=_users[id];
-            //foreach (var user in _users)
-            //{
-            //    if (user.Id.Equals(id))
-            //    {
-            //        return user;
-            //    }
-            //}
-
 
             throw new FileNotFoundException("User does not Exist");
         }
@@ -55,23 +49,17 @@ namespace GameCollection.User
             return user;
         }
 
-        public User UpdateUser(Guid id, string name)
+        public User UpdateUser(User user)
         {
-            User user;
-            try
-            {
-                user=GetUserById(id);
-            }
-            catch
-            {
-                throw new FileNotFoundException("This user does not Exist!");
-            }
-            _users.Remove(user.Id);
+            
 
-            var newUser = new User(id, name);
-            _users.Add(newUser.Id, newUser);
+            if (GetUserById(user.Id) is not null)
+            {
+                _users.Remove(user.Id);
+                _users.Add(user.Id, user);
+            }
             WriteUsersToFile();
-            return newUser;
+            return user;
         }
         private void InitUserPersistation()
         {

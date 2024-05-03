@@ -12,19 +12,19 @@ namespace GameCollection.Controller
     public class MainController
     {
         private readonly IGameRepository _gameRepository;
-        private readonly UserRepository _userRepository;
+        private readonly IUserService _userService;
         private readonly ArchivmentController _archivmentController;
 
-        public MainController(IGameRepository gameRepository, UserRepository userRepository, ArchivmentController archivmentController)
+        public MainController(IGameRepository gameRepository, IUserService userService, ArchivmentController archivmentController)
         {
             _gameRepository = gameRepository;
-            _userRepository = userRepository;
+            _userService = userService;
             _archivmentController = archivmentController;
         }
 
         public void RunGameCollection()
         {
-            var userView = new UserChooseAndCreateView(_userRepository);
+            var userView = new UserChooseAndCreateView(_userService);
             var user = userView.Show();
             while (true)
             {
@@ -65,8 +65,8 @@ namespace GameCollection.Controller
                     catch (Exception e)
                     {
                         Console.WriteLine("It seems like you have not played this game yet!");
-                        Console.WriteLine("Press Enter to retrun to the main menu");
-                        Console.ReadLine();
+                        Console.WriteLine("Returning to the main menu");
+                        Thread.Sleep(3000);
                     }
                 }
             }

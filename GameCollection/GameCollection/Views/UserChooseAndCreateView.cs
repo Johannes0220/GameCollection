@@ -7,10 +7,10 @@ namespace GameCollection.Views
 {
     public class UserChooseAndCreateView : BasicView
     {
-        private readonly UserRepository _userRepository;
-        public UserChooseAndCreateView(UserRepository userRepository)
+        private readonly IUserService _userService;
+        public UserChooseAndCreateView(IUserService userService)
         {
-            _userRepository = userRepository;
+            _userService = userService;
         }
 
         public User.User Show()
@@ -30,7 +30,7 @@ namespace GameCollection.Views
 
         private User.User ShowChooseUser()
         {
-            var users = _userRepository.GetAllUsers();
+            var users = _userService.GetAllUsers();
             
             
             Console.WriteLine("Available Users");
@@ -52,7 +52,7 @@ namespace GameCollection.Views
             Console.WriteLine($"User \"{name}\" was created sucessfully");
             Thread.Sleep(2000);
             Console.Clear();
-            return _userRepository.CreateUser(name);
+            return _userService.CreateUser(name);
         }
 
 

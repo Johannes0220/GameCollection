@@ -19,10 +19,10 @@ public class ArchivmentView: BasicView
 
     public void ShowArchivementsForGame(List<IArchivable> archivments, Type game)
     {
-        Console.WriteLine("Name\tLevel\t Score");
+        Console.WriteLine("Name\t\tLevel\t Score");
         foreach (var archivable in archivments)
         {
-            Console.WriteLine($"{archivable.Name}\t{archivable.Level}\t "/*{archivable.GetScore()}"*/);
+            Console.WriteLine($"{archivable.Name}\t{archivable.Level}\t {archivable.GetScore().GetScore()}");
         }
         Console.WriteLine("Press Enter to return to the main menu!");
         Console.ReadLine();
