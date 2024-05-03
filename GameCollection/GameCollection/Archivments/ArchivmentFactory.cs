@@ -12,7 +12,7 @@ using GameCollection.Games.VierGewinnt;
 
 namespace GameCollection.Archivements;
 
-public class ArchivmentFactory
+public class ArchivmentFactory : IArchivmentFactory
 {
     private Dictionary<Type, List<Type>> _archivments;
     private readonly IGameRepository _gameRepository;
@@ -47,7 +47,7 @@ public class ArchivmentFactory
         _archivments[typeof(HangmanGameController)].Add(typeof(TimePlayed));
         _archivments[typeof(MemoryController)].Add(typeof(TimePlayed));
         _archivments[typeof(SnakeController)].Add(typeof(TimePlayed));
-        _archivments[typeof(TicTacToeController)].Add(                                                                                                                                             typeof(TimePlayed));
+        _archivments[typeof(TicTacToeController)].Add(typeof(TimePlayed));
         _archivments[typeof(TowerOfHanoiController)].Add(typeof(TimePlayed));
         _archivments[typeof(ConnectFourController)].Add(typeof(TimePlayed));
     }
