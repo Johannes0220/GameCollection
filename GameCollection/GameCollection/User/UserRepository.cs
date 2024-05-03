@@ -35,9 +35,7 @@ namespace GameCollection.User
         public User GetUserById(Guid id)
         {
 
-            var user=_users[id];
-
-            throw new FileNotFoundException("User does not Exist");
+            return _users[id];
         }
 
         public User CreateUser(string name)

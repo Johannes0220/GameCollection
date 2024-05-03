@@ -1,12 +1,13 @@
-﻿using GameCollection.Archivements;
+﻿using System.ComponentModel;
+using GameCollection.Archivements;
 
 namespace GameCollection.Controller;
 
 public class ArchivmentController
 {
-    private readonly ArchivmentFactory _archivmentFactory;
+    private readonly IArchivmentFactory _archivmentFactory;
 
-    public ArchivmentController(ArchivmentFactory archivmentFactory)
+    public ArchivmentController(IArchivmentFactory archivmentFactory)
     {
         _archivmentFactory = archivmentFactory;
     }
@@ -25,7 +26,7 @@ public class ArchivmentController
 
         foreach (var archivment in archivments)
         {
-            if (archivment.GetType().IsAssignableFrom(typeof(ITrackable)))
+            if (archivment is ITrackable)
             {
                 var trackable=(ITrackable)archivment;
                 trackable.StartTracking();
@@ -38,7 +39,7 @@ public class ArchivmentController
         var archivments=user.GetArchivments(game);
         foreach (var archivment in archivments)
         {
-            if (archivment.GetType().IsAssignableFrom(typeof(ITrackable)))
+            if (archivment is ITrackable)
             {
                 var trackable = (ITrackable)archivment;
                 trackable.StopTracking();
