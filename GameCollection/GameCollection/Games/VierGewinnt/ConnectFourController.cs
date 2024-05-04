@@ -23,15 +23,7 @@ public class ConnectFourController : IPlayable
     {
         try
         {
-            var difficulty = _ConnectFourView.GetDifficulty();
-            if (difficulty.Equals(0))
-            {
-                _bot = new ConnectFourRandomBot();
-            }
-            else
-            {
-                _bot = new ConnectFourBlockBot();
-            }
+            GetDifficulty();
 
             _ConnectFour.InitGame();
             int input = 0;
@@ -40,27 +32,11 @@ public class ConnectFourController : IPlayable
 
                 if (_ConnectFour.player1Turn)
                 {
-
-                    _ConnectFourView.RenderBoard(_ConnectFour.board);
-                    input = _ConnectFourView.GetPlayerInput(_ConnectFour.board);
-                    _ConnectFour.SetInput(input);
-                    if (_ConnectFour.CheckFor4())
-                    {
-                        _ConnectFourView.RenderBoard(_ConnectFour.board);
-                        _ConnectFourView.DisplayWon();
-                        break;
-                    }
+                    if (DoPlayerTurn(out input)) break;
                 }
                 else
                 {
-                    var move = _bot.getMove(_ConnectFour.board, input);
-                    _ConnectFour.SetInput(move);
-                    if (_ConnectFour.CheckFor4())
-                    {
-                        _ConnectFourView.RenderBoard(_ConnectFour.board);
-                        _ConnectFourView.DisplayLost();
-                        break;
-                    }
+                    if (DoBotTurn(input)) break;
                 }
                 if (_ConnectFour.CheckForDraw())
                 {
@@ -87,5 +63,47 @@ public class ConnectFourController : IPlayable
             //Console.WriteLine(exception?.ToString() ?? "Connect 4 was closed.");
         }
 
+    }
+
+    private bool DoBotTurn(int input)
+    {
+        var move = _bot.getMove(_ConnectFour.board, input);
+        _ConnectFour.SetInput(move);
+        if (_ConnectFour.CheckFor4())
+        {
+            _ConnectFourView.RenderBoard(_ConnectFour.board);
+            _ConnectFourView.DisplayLost();
+            return true;
+        }
+
+        return false;
+    }
+
+    private bool DoPlayerTurn(out int input)
+    {
+        _ConnectFourView.RenderBoard(_ConnectFour.board);
+        input = _ConnectFourView.GetPlayerInput(_ConnectFour.board);
+        _ConnectFour.SetInput(input);
+        if (_ConnectFour.CheckFor4())
+        {
+            _ConnectFourView.RenderBoard(_ConnectFour.board);
+            _ConnectFourView.DisplayWon();
+            return true;
+        }
+
+        return false;
+    }
+
+    private void GetDifficulty()
+    {
+        var difficulty = _ConnectFourView.GetDifficulty();
+        if (difficulty.Equals(0))
+        {
+            _bot = new ConnectFourRandomBot();
+        }
+        else
+        {
+            _bot = new ConnectFourBlockBot();
+        }
     }
 }
