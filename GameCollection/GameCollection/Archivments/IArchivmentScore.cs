@@ -2,5 +2,6 @@
 
 public interface IArchivmentScore
 {
+    string Unit { get; }
     string GetScore();
 }

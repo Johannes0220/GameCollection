@@ -1,19 +1,20 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using GameCollection.Archivements;
 using GameCollection.Games;
 
-namespace GameCollection.Archivements;
+namespace GameCollection.Archivments.Trackable;
 
-public class TimePlayed: IArchivable, ITrackable
+public class TimePlayed : IArchivable, ITrackable
 {
-    private readonly Dictionary<int,TimeSpan>_archivmentSteps;
+    private readonly Dictionary<int, TimeSpan> _archivmentSteps;
     private readonly TimeSpan _timePlayed;
     private DateTime _startTracking;
-    
+
 
     public TimePlayed()
     {
         Name = "Time Played";
-        _archivmentSteps=new Dictionary<int, TimeSpan>();
+        _archivmentSteps = new Dictionary<int, TimeSpan>();
         _timePlayed = TimeSpan.Zero;
         InitArchivmentSteps();
 
@@ -24,19 +25,19 @@ public class TimePlayed: IArchivable, ITrackable
         var offset1 = new TimeSpan(1, 0, 0);
         for (int i = 0; i < 25; i++)
         {
-            var level= i* offset1;
-            _archivmentSteps.Add(i,i*offset1);
+            var level = i * offset1;
+            _archivmentSteps.Add(i, i * offset1);
         }
     }
 
     public void StartTracking()
     {
-        _startTracking=DateTime.UtcNow;
+        _startTracking = DateTime.UtcNow;
     }
 
     public void StopTracking()
     {
-        var stop=DateTime.UtcNow;
+        var stop = DateTime.UtcNow;
         var timePlayed = stop.Subtract(_startTracking);
         _timePlayed.Add(timePlayed);
     }
@@ -46,7 +47,7 @@ public class TimePlayed: IArchivable, ITrackable
         var currentLevel = 0;
         foreach (var level in _archivmentSteps)
         {
-            if (TimeSpan.Compare(_timePlayed,level.Value)>=1)
+            if (TimeSpan.Compare(_timePlayed, level.Value) >= 1)
             {
                 currentLevel = level.Key;
             }

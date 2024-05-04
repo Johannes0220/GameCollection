@@ -9,6 +9,7 @@ using GameCollection.Games.Snake;
 using GameCollection.Games.TicTacToe;
 using GameCollection.Games.TowerOfHanoi;
 using GameCollection.Games.VierGewinnt;
+using GameCollection.Archivments.Trackable;
 
 namespace GameCollection.Archivements;
 
