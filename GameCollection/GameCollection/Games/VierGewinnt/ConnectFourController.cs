@@ -8,11 +8,13 @@ public class ConnectFourController : IPlayable
     private readonly ConnectFourView _ConnectFourView;
     private readonly ConnectFour _ConnectFour;
     private IConnectFourBot _bot;
+    private readonly ConnectFourDifficultyChooser _connectFourDifficultyChooser;
 
     public ConnectFourController()
     {
         _ConnectFourView = new ConnectFourView();
         _ConnectFour = new ConnectFour();
+        _connectFourDifficultyChooser = new ConnectFourDifficultyChooser(_ConnectFourView);
     }
     public string GetName()
     {
@@ -23,8 +25,7 @@ public class ConnectFourController : IPlayable
     {
         try
         {
-            GetDifficulty();
-
+            _bot=_connectFourDifficultyChooser.GetDifficulty();
             _ConnectFour.InitGame();
             int input = 0;
             while (true)
@@ -38,6 +39,7 @@ public class ConnectFourController : IPlayable
                 {
                     if (DoBotTurn(input)) break;
                 }
+
                 if (_ConnectFour.CheckForDraw())
                 {
                     _ConnectFourView.RenderBoard(_ConnectFour.board);
@@ -92,18 +94,5 @@ public class ConnectFourController : IPlayable
         }
 
         return false;
-    }
-
-    private void GetDifficulty()
-    {
-        var difficulty = _ConnectFourView.GetDifficulty();
-        if (difficulty.Equals(0))
-        {
-            _bot = new ConnectFourRandomBot();
-        }
-        else
-        {
-            _bot = new ConnectFourBlockBot();
-        }
     }
 }

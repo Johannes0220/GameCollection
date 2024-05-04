@@ -1,7 +1,6 @@
-﻿using System.Collections;
+﻿using GameCollection.Archivments.Trackable;
 using GameCollection.Games;
 using GameCollection.Games._2048;
-using System.Linq;
 using GameCollection.Games.FlappyBird;
 using GameCollection.Games.GuessTheNumber;
 using GameCollection.Games.Hangman;
@@ -9,7 +8,6 @@ using GameCollection.Games.Snake;
 using GameCollection.Games.TicTacToe;
 using GameCollection.Games.TowerOfHanoi;
 using GameCollection.Games.VierGewinnt;
-using GameCollection.Archivments.Trackable;
 
 namespace GameCollection.Archivements;
 
