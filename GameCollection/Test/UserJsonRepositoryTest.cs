@@ -8,16 +8,17 @@ using Utils;
 namespace Test
 {
     [TestClass]
-    public class UserRepositoryTest
+    public class UserJsonRepositoryTest
     {
         private static readonly DirectoryInfo _rootPath = new(Environment.CurrentDirectory);
         private FileInfo testUserFile = new FileInfo(Path.Combine(_rootPath.FullName,"\\Test\\User.json"));
 
 
+        //#livesaver
         [TestMethod]
         public void TestInitUserPersistationIfNotExisting()
         {
-            //setup
+            //Arrange
             try
             {
                 Directory.Delete(testUserFile.DirectoryName, true);
@@ -28,9 +29,9 @@ namespace Test
             }
 
             //Act
-            var _userRepository = new UserRepository(testUserFile, new CustomJsonSerializer());
+            var _userRepository = new UserJsonRepository(testUserFile, new CustomJsonSerializer());
 
-            //Test
+            //Assert
             Assert.IsTrue(File.Exists(testUserFile.FullName));
 
             //clean up
@@ -58,7 +59,7 @@ namespace Test
             File.WriteAllText(testUserFile.FullName, usersJson);
 
             //Act
-            var _userRepository = new UserRepository(testUserFile, new CustomJsonSerializer());
+            var _userRepository = new UserJsonRepository(testUserFile, new CustomJsonSerializer());
 
             //Test
             Assert.IsTrue(File.Exists(testUserFile.FullName));

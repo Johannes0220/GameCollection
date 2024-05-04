@@ -23,7 +23,7 @@ public class ConnectFourController : IPlayable
     {
         try
         {
-            var difficulty= _ConnectFourView.GetDifficulty();
+            var difficulty = _ConnectFourView.GetDifficulty();
             if (difficulty.Equals(0))
             {
                 _bot = new ConnectFourRandomBot();

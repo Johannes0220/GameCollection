@@ -8,13 +8,13 @@ using Utils;
 
 namespace GameCollection.User
 {
-    public class UserRepository : IUserRepository
+    public class UserJsonRepository : IUserRepository
     {
         private readonly FileInfo _userFile;
         private readonly ICustomJsonSerializer _jsonSerializer;
         //private List<User> _users;
         private Dictionary<Guid, User> _users;
-        public UserRepository(FileInfo userFile, ICustomJsonSerializer jsonSerializer)
+        public UserJsonRepository(FileInfo userFile, ICustomJsonSerializer jsonSerializer)
         {
             //_users = new List<User>();
             _users=new Dictionary<Guid, User>();

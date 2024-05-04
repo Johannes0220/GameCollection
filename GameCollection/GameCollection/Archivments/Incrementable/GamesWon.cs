@@ -10,7 +10,7 @@ public class GamesWon : IIncrementable
     private int winCnt = 0;
     public IArchivmentScore GetScore()
     {
-        
+        return new WinScore(winCnt, "Wins");
     }
 
     public void Increment()

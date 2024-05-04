@@ -32,7 +32,7 @@ public class Bootstrapper
         _gameRepository = new GameRepository();
         _archivmentFactory = new ArchivmentFactory(_gameRepository);
         _archivmentController = new ArchivmentController(_archivmentFactory);
-        _userRepository = new UserRepository(new FileInfo(Path.Combine(_localUserPath.FullName,"Users.json")),jsonSerializer);
+        _userRepository = new UserJsonRepository(new FileInfo(Path.Combine(_localUserPath.FullName,"Users.json")),jsonSerializer);
         _userService = new UserService(_userRepository);
     }
 
