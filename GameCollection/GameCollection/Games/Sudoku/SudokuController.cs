@@ -24,7 +24,7 @@ public class SudokuController:IPlayable
 
         while (_gameState != SudokuGameState.CloseRequested)
         {
-            Console.Clear();
+            _view.ClearConsole();
             _sudoku = new Sudoku();
             int?[,] generatedBoard = _sudoku.GeneratedBoard;
             int?[,] activeBoard = _sudoku.ActiveBoard;
@@ -33,9 +33,10 @@ public class SudokuController:IPlayable
 
             while (_gameState == SudokuGameState.Ongoing)
             {
-                Console.Clear();
+                _view.ClearConsole();
                 _view.DisplayBoard(activeBoard, generatedBoard);
                 _view.DisplayInstructions();
+                
                 Console.SetCursorPosition((y * 2) + (y / 3) * 2 + 2, x + 3 + (x / 3));
 
                 var key = Console.ReadKey(true).Key;
@@ -126,7 +127,6 @@ public class SudokuController:IPlayable
         }
 
         _view.DisplayGameOverMesssage();
-        //return new ScoreGameResult(_snake.GetSnakeLength());
         //return new WonGameResult(true);
         return null;
     }

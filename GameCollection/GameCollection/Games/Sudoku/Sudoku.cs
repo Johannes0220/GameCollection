@@ -50,17 +50,28 @@ public class Sudoku
                 for (int value = 1; value <= 9; value++)
                 {
                     if (IsValueValid(value, board, i, j))
-                    {  
+                    {
                         valids[i, j].Values[valids[i, j].Count++] = value;
                     }
                 }
 
-                if (valids[i, j].Count == 0)
+                while (valids[i, j].Count == 0) 
                 {
-                    i = j == 0 ? i - 1 : i;
-                    j = j == 0 ? 8 : j - 1;
+                    if (j == 0) 
+                    {
+                        j = 8; 
+                    }
+                    else
+                    {
+                        j--;
+                    }
+
+                    if (i < 0 || i >= 9 || j < 0 || j >= 9)
+                    {
+                        throw new InvalidOperationException("Ungültiger Index bei Rückschritt.");
+                    }
+
                     board[i, j] = null;
-                    continue;
                 }
 
                 int randomIndex = random.Next(0, valids[i, j].Count);
@@ -95,7 +106,6 @@ public class Sudoku
                 }
             }
         }
-
         return true;
     }
 

@@ -8,9 +8,10 @@ public class SudokuView
 
     public void DisplayBoard(int?[,] board, int?[,] lockedBoard)
     {
+        Console.WriteLine("Sudoku");
+        Console.WriteLine();
         ConsoleColor originalColor = Console.ForegroundColor;
         Console.ForegroundColor = ConsoleColor.DarkGray;
-
         Console.WriteLine("╔═══════╦═══════╦═══════╗");
         for (int i = 0; i < 9; i++)
         {
@@ -47,7 +48,8 @@ public class SudokuView
 
     public void DisplayInstructions()
     {
-        Console.WriteLine("Sudoku");
+        Console.WriteLine();
+        Console.WriteLine("Instruction:");
         Console.WriteLine();
         Console.WriteLine("Press arrow keys to select a cell.");
         Console.WriteLine("Press 1-9 to insert values.");
@@ -76,6 +78,11 @@ public class SudokuView
         Console.WriteLine("Gameover...");
         Console.WriteLine("You will be redirected to the game selection in 3 seconds");
         Thread.Sleep(_delayMainMenu);
+        Console.Clear();
+    }
+
+    public void ClearConsole()
+    {
         Console.Clear();
     }
 }
