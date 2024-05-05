@@ -26,7 +26,8 @@ namespace GameCollection.Views
 
             for (int i = 0; i < _gameList.Count; i++)
             {
-                Console.WriteLine("\t" + i + ". " + _gameList[i].Name);
+                var name = _gameList[i].Name.Replace("Controller", "");
+                Console.WriteLine("\t" + i + ". " + name);
             }
 
             var gameNum = ReadNumericInput("",0,_gameList.Count-1);
