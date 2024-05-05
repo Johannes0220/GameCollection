@@ -4,7 +4,7 @@ public class GuessTheNumberController:IPlayable
 {
     private readonly GuessTheNumber _guessTheNumber;
     private readonly GuessTheNumberView _guessTheNumberView;
-    private readonly string _name = "GuessTheNumber";
+    public static readonly string Name = "Guess The Number";
     private readonly Guid _guid = Guid.NewGuid();
 
 
@@ -19,7 +19,7 @@ public class GuessTheNumberController:IPlayable
         _guessTheNumberView = guessTheNumberView;
     }
 
-    public void StartGame()
+    public IGameResult StartGame()
     {
         var guess = 0;
         while (!_guessTheNumber.CheckGuess(guess))
@@ -35,10 +35,8 @@ public class GuessTheNumberController:IPlayable
                 _guessTheNumberView.DisplayHint(_guessTheNumber.GetHint(guess));
             }
         }
+
+        return new WinGameResult(true);
     }
 
-    public string GetName()
-    {
-        return _name;
-    }
 }

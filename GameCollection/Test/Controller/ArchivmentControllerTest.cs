@@ -1,5 +1,6 @@
 ﻿using GameCollection.Archivements;
 using GameCollection.Controller;
+using GameCollection.Games;
 using GameCollection.Games.VierGewinnt;
 using Test.Archivments;
 
@@ -36,8 +37,9 @@ public class ArchivmentControllerTest
         var controller = new ArchivmentController(factory);
         var user = new GameCollection.User.User(Guid.NewGuid(), "test");
         controller.RunArchivmentsForGame(typeof(ConnectFourController), user);
+        var res = new WinGameResult(true);
         //Act
-        controller.UpdateArchivmentsForGame(typeof(ConnectFourController), user);
+        controller.UpdateArchivmentsForGame(typeof(ConnectFourController), user,res);
 
         //Assert
         Assert.IsTrue(mockArchivment.StoppedTracking);

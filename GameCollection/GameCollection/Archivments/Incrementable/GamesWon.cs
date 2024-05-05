@@ -13,8 +13,15 @@ public class GamesWon : IIncrementable
         return new WinScore(winCnt, "Wins");
     }
 
-    public void Increment()
+    public void Increment(int? score)
     {
-        winCnt++;
+        if (score.HasValue)
+        {
+            winCnt += score.Value;
+        }
+        else
+        {
+            score++;
+        }
     }
 }

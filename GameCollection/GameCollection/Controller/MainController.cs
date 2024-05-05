@@ -36,12 +36,13 @@ namespace GameCollection.Controller
                     var gameChooserView = new GameChooserView(_gameRepository);
                     var game = gameChooserView.Show();
                     _archivmentController.RunArchivmentsForGame(game, user);
+                    IGameResult gameResult;
                     try
                     {
                         var activeGame = (IPlayable)Activator.CreateInstance(game);
                         user.GetArchivments(activeGame.GetType());
-                        activeGame.StartGame();
-                        _archivmentController.UpdateArchivmentsForGame(game, user);
+                        gameResult=activeGame.StartGame();
+                        _archivmentController.UpdateArchivmentsForGame(game, user, gameResult);
                     }
                     catch (Exception e)
                     {

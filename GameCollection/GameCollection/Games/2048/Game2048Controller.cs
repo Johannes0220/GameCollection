@@ -1,4 +1,5 @@
-﻿using System.Xml.Linq;
+﻿using System.Reflection.Metadata.Ecma335;
+using System.Xml.Linq;
 
 namespace GameCollection.Games._2048;
 
@@ -6,7 +7,7 @@ public class Game2048Controller:IPlayable
 {
     private Game2048 _game;
     private readonly Game2048View _game2048View;
-    private readonly string _name = "2048";
+    public static readonly string Name = "Game 2048";
     private readonly Guid _guid = Guid.NewGuid();
 
     public Game2048Controller()
@@ -15,7 +16,7 @@ public class Game2048Controller:IPlayable
         _game2048View = new Game2048View();
     }
 
-    public void StartGame()
+    public IGameResult StartGame()
     {
         _game.GenerateNewTile();
         while (true)
@@ -48,7 +49,7 @@ public class Game2048Controller:IPlayable
                     break;
                 case ConsoleKey.Escape:
                     _game2048View.Close();
-                    return;
+                    return new ScoreGameResult(_game.GetScore());
                 default:
                     continue;
             }
@@ -56,10 +57,8 @@ public class Game2048Controller:IPlayable
             if (_game.TryMove(direction)){}
                 _game.GenerateNewTile();
         }
+        return new ScoreGameResult(_game.GetScore());
     }
 
-    public string GetName()
-    {
-        return _name;
-    }
+
 }

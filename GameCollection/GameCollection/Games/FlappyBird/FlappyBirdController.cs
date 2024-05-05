@@ -4,16 +4,15 @@ public class FlappyBirdController : IPlayable
 {
     private readonly FlappyBird _flappyBird;
     private readonly FlappyBirdView _flappyBirdView;
-    private readonly string _name = "Flappy Bird";
     private readonly Guid _guid = Guid.NewGuid();
-
+    public static readonly string Name = "Flappy Bird";
     public FlappyBirdController()
     {
         _flappyBird = new FlappyBird();
         _flappyBirdView = new FlappyBirdView();
     }
 
-    public void StartGame()
+    public IGameResult StartGame()
     {
         _flappyBird.GameState = FlappyBirdGameState.Play;
 
@@ -32,7 +31,7 @@ public class FlappyBirdController : IPlayable
                 else if (keyInfo.Key == ConsoleKey.Escape)
                 {
                     _flappyBirdView.Close();
-                    return;
+                    return new ScoreGameResult(_flappyBird.Score);
                 }
             }
 
@@ -68,10 +67,7 @@ public class FlappyBirdController : IPlayable
         {
             _flappyBirdView.GameOver(_flappyBird.Score);
         }
-    }
 
-    public string GetName()
-    {
-        return _name;
+        return new ScoreGameResult(_flappyBird.Score);
     }
 }

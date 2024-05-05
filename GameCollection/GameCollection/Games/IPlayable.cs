@@ -8,8 +8,7 @@ namespace GameCollection.Games
 {
     public interface IPlayable
     {
-        string GetName();
-
-        void StartGame();
+        static string Name { get; }
+        IGameResult StartGame();
     }
 }

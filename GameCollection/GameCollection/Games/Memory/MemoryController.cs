@@ -11,18 +11,14 @@ public class MemoryController : IPlayable
     bool pendingConfirmation = false;
     private readonly MemoryView _memoryView;
     private readonly Memory _memory;
-
+    public static readonly string Name = "Memory";
     public MemoryController()
     {
         _memoryView = new MemoryView();
         _memory = new Memory();
     }
-    public string GetName()
-    {
-        throw new NotImplementedException();
-    }
-
-    public void StartGame()
+    
+    public IGameResult StartGame()
     {
         try
         {
@@ -52,5 +48,7 @@ public class MemoryController : IPlayable
             exception = e;
             throw;
         }
+
+        return new WinGameResult(true);
     }
 }

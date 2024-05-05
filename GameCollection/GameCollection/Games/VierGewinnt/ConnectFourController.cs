@@ -9,20 +9,18 @@ public class ConnectFourController : IPlayable
     private readonly ConnectFour _ConnectFour;
     private IConnectFourBot _bot;
     private readonly ConnectFourDifficultyChooser _connectFourDifficultyChooser;
-
+    private IGameResult result;
+    public static readonly string Name = "Connect";
     public ConnectFourController()
     {
         _ConnectFourView = new ConnectFourView();
         _ConnectFour = new ConnectFour();
         _connectFourDifficultyChooser = new ConnectFourDifficultyChooser(_ConnectFourView);
     }
-    public string GetName()
+ 
+    public IGameResult StartGame()
     {
-        throw new NotImplementedException();
-    }
-
-    public void StartGame()
-    {
+       
         try
         {
             _bot=_connectFourDifficultyChooser.GetDifficulty();
@@ -65,6 +63,7 @@ public class ConnectFourController : IPlayable
             //Console.WriteLine(exception?.ToString() ?? "Connect 4 was closed.");
         }
 
+        return result;
     }
 
     private bool DoBotTurn(int input)
@@ -76,6 +75,7 @@ public class ConnectFourController : IPlayable
             _ConnectFourView.RenderBoard(_ConnectFour.board);
             _ConnectFourView.DisplayLost();
             return true;
+            result = new WinGameResult(false);
         }
 
         return false;
@@ -91,6 +91,7 @@ public class ConnectFourController : IPlayable
             _ConnectFourView.RenderBoard(_ConnectFour.board);
             _ConnectFourView.DisplayWon();
             return true;
+            result = new WinGameResult(true);
         }
 
         return false;

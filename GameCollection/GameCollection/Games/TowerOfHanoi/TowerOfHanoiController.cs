@@ -9,18 +9,14 @@ public class TowerOfHanoiController :IPlayable
 {
     private readonly TowerOfHanoi _towerOfHanoi;
     private readonly TowerOfHanoiView _towerOfHanoiView;
-
+    public static readonly string Name = "Tower of Hanoi";
     public TowerOfHanoiController()
     {
         _towerOfHanoi=new TowerOfHanoi();
         _towerOfHanoiView=new TowerOfHanoiView();
     }
-    public string GetName()
-    {
-        throw new NotImplementedException();
-    }
     
-    public void StartGame()
+    public IGameResult StartGame()
     {
         try
         {
@@ -53,21 +49,13 @@ public class TowerOfHanoiController :IPlayable
             
             _towerOfHanoiView.RenderTowers(_towerOfHanoi.stacks, _towerOfHanoi.disks, _towerOfHanoi.minimumNumberOfMoves, _towerOfHanoi.moves, _towerOfHanoi.state, _towerOfHanoi.source);
             _towerOfHanoiView.DisplayWon();
+            return new WinGameResult(true);
         }
         catch (Exception e)
         {
 
         }
-        
-
-        
-
-        
-        
-
-
-
-
+        return new WinGameResult(false);
     }
     
 }

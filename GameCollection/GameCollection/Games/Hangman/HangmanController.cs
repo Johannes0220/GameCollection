@@ -8,17 +8,15 @@ public class HangmanGameController:IPlayable
     private readonly Hangman _hangman;
     private readonly HangmanView _hangmanView;
     private readonly HangmanRenders _hangmanRenders;
-    private readonly string _name = "Hangman";
     private readonly Guid _guid = Guid.NewGuid();
-
+    public static readonly string Name = "Hangman";
     public HangmanGameController()
     {
         _hangman = new Hangman();
         _hangmanView = new HangmanView();
         _hangmanRenders = new HangmanRenders();
     }
-
-    public void StartGame()
+    public IGameResult StartGame()
     {
         while (_hangman.State == HangmanGameState.InProgress)
         {
@@ -33,21 +31,19 @@ public class HangmanGameController:IPlayable
         }
 
         string randomWord = _hangman.GetRandomWord();
-
+        bool won = false;
         switch (_hangman.State)
         {
             case HangmanGameState.Won:
                 _hangmanView.DisplayWinMessage(randomWord);
+                won = true;
                 break;
             case HangmanGameState.Lost:
                 _hangmanView.DisplayDeathAnimation(_hangmanRenders);
                 _hangmanView.DisplayLossMessage();
                 break;
         }
-    }
 
-    public string GetName()
-    {
-        return _name;
+        return new WinGameResult(won);
     }
 }

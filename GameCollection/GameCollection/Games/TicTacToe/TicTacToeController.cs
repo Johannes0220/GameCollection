@@ -2,9 +2,9 @@
 
 public class TicTacToeController:IPlayable
 {
+    public static readonly string Name = "Tic Tac Toe";
     private readonly TicTacToe _ticTacToe;
     private readonly TicTacToeView _ticTacToeView;
-    private readonly string _name = "TicTacToe";
     private readonly Guid _guid = Guid.NewGuid();
 
     public TicTacToeController()
@@ -13,7 +13,7 @@ public class TicTacToeController:IPlayable
         _ticTacToeView = new TicTacToeView();
     }
 
-    public void StartGame()
+    public IGameResult StartGame()
     {
         char currentPlayer = 'X';
         while (!_ticTacToe.IsBoardFull())
@@ -27,7 +27,7 @@ public class TicTacToeController:IPlayable
                 {
                     _ticTacToeView.PrintBoard(_ticTacToe);
                     _ticTacToeView.DisplayWinner(currentPlayer);
-                    return;
+                    return new WinGameResult(true);
                 }
                 currentPlayer = (currentPlayer == 'X') ? 'O' : 'X';
             }
@@ -38,10 +38,6 @@ public class TicTacToeController:IPlayable
         }
 
         _ticTacToeView.DisplayTie();
-    }
-
-    public string GetName()
-    {
-        return _name;
+        return new WinGameResult(false);
     }
 }

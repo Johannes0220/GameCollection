@@ -9,6 +9,7 @@ public class SnakeController:IPlayable
     private readonly char[] _directionChars = { '^', 'v', '<', '>' };
     private bool closeRequested;
     private SnakeDirection? direction;
+    public static readonly string Name = "Snake";
 
     public SnakeController()
     {
@@ -16,7 +17,7 @@ public class SnakeController:IPlayable
         _snakeView = new SnakeView();
     }
 
-    public void StartGame()
+    public IGameResult StartGame()
     {
         _snakeView.StartText();
         _snakeView.RenderSnakeHead(_snake.GetWidth(), _snake.GetHeight());
@@ -35,7 +36,7 @@ public class SnakeController:IPlayable
             if (_snake.CheckWindowResize())
             {
                 _snakeView.ResizeMessage();
-                return;
+                return new ScoreGameResult(_snake.GetSnakeLength());
             }
 
             if (firstMove && !Console.KeyAvailable)
@@ -96,10 +97,7 @@ public class SnakeController:IPlayable
 
             Thread.Sleep(100);
         }
-    }
 
-    public string GetName()
-    {
-        return _name;
+        return new ScoreGameResult(_snake.GetSnakeLength());
     }
 }

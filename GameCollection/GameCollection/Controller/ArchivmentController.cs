@@ -1,6 +1,8 @@
 ﻿using System.ComponentModel;
 using GameCollection.Archivements;
+using GameCollection.Archivments.Incrementable;
 using GameCollection.Archivments.Trackable;
+using GameCollection.Games;
 
 namespace GameCollection.Controller;
 
@@ -35,15 +37,34 @@ public class ArchivmentController
         }
     }
 
-    public void UpdateArchivmentsForGame(Type game, User.User user)
+    public void UpdateArchivmentsForGame(Type game, User.User user, IGameResult gameResult)
     {
         var archivments=user.GetArchivments(game);
         foreach (var archivment in archivments)
         {
             if (archivment is ITrackable)
             {
-                var trackable = (ITrackable)archivment;
+                var trackable = archivment as ITrackable;
                 trackable.StopTracking();
+            }
+
+            if (archivment is IIncrementable)
+            {
+                var incrementable = archivment as IIncrementable;
+                if (gameResult is IWinGameResult)
+                {
+                    var winGameResult = gameResult as IWinGameResult;
+                    if (winGameResult.Result)
+                    {
+                        incrementable.Increment(null);
+                    }
+                }
+
+                if (gameResult is IScoreGameResult)
+                {
+                    var scoreGameResult=gameResult as IScoreGameResult;
+                    incrementable.Increment(scoreGameResult.Score);
+                }
             }
         }
     }
