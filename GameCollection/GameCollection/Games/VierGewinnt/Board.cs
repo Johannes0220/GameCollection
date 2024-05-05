@@ -1,6 +1,6 @@
 ﻿namespace GameCollection.Games.VierGewinnt;
 
-public class Board
+public class Board : IBoard
 {
     public bool?[,] board { get; set; }
     public int height { get; set; }

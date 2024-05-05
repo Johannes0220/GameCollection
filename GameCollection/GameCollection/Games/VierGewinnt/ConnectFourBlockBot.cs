@@ -3,7 +3,7 @@
 public class ConnectFourBlockBot : IConnectFourBot
 {
     private ConnectFourRandomBot _randomBot = new ConnectFourRandomBot();
-    public int getMove(Board board, int move)
+    public int getMove(IBoard board, int move)
     {
         switch(CheckForThree(board, move)){
 
@@ -24,7 +24,7 @@ public class ConnectFourBlockBot : IConnectFourBot
 
     }
 
-    private Direction CheckForThree(Board board, int move)
+    private Direction CheckForThree(IBoard board, int move)
     {
         var row = board.GetFillStateColumn(move);
         bool player = true;

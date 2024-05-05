@@ -6,7 +6,7 @@ public class ConnectFourView: BasicView
 {
     public const int moveMinI = 5;
     public const int moveJ = 2;
-    public void RenderBoard(Board board)
+    public void RenderBoard(IBoard board)
     {
         Console.Clear();
         Console.WriteLine();
@@ -55,7 +55,7 @@ public class ConnectFourView: BasicView
         Console.SetCursorPosition(iFinal, jFinal);
     }
 
-    public int GetPlayerInput(Board board)
+    public int GetPlayerInput(IBoard board)
     {
         int i = 0;
         Console.SetCursorPosition(moveMinI, moveJ);

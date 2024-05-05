@@ -4,7 +4,7 @@ public class ConnectFour
 {
     Exception? exception = null;
 
-    public Board board { get; set; }
+    public IBoard board { get; set; }
     public bool player1Turn { get; set; }
     (int column, int row) move = default;
     public void InitGame()
