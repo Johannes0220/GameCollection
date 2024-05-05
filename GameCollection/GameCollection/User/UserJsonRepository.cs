@@ -10,10 +10,10 @@ namespace GameCollection.User
 {
     public class UserJsonRepository : IUserRepository
     {
-        private readonly FileInfo _userFile;
-        private readonly ICustomJsonSerializer _jsonSerializer;
+        protected readonly FileInfo _userFile;
+        protected readonly ICustomJsonSerializer _jsonSerializer;
         //private List<User> _users;
-        private Dictionary<Guid, User> _users;
+        protected Dictionary<Guid, User> _users;
         public UserJsonRepository(FileInfo userFile, ICustomJsonSerializer jsonSerializer)
         {
             //_users = new List<User>();
@@ -59,7 +59,7 @@ namespace GameCollection.User
             WriteUsersToFile();
             return user;
         }
-        private void InitUserPersistation()
+        protected void InitUserPersistation()
         {
             if (File.Exists(_userFile.FullName))
             {
@@ -83,7 +83,7 @@ namespace GameCollection.User
 
         }
 
-        private void ReadUsersFromFile()
+        protected void ReadUsersFromFile()
         {
             try
             {
@@ -99,7 +99,7 @@ namespace GameCollection.User
         }
 
 
-        private void WriteUsersToFile()
+        protected void WriteUsersToFile()
         {
             try
             {

@@ -6,10 +6,10 @@ public class ArchivmentView: BasicView
 {
     public Type ChooseGame(List<Type> gameList)
     {
-        for( int i=0; i<gameList.Count; i++)
+        for (int i = 0; i < gameList.Count; i++)
         {
-
-            Console.WriteLine($"[{i}] {gameList[i].Name}");
+            var name = gameList[i].Name.Replace("Controller", "");
+            Console.WriteLine("\t" + i + ". " + name);
         }
 
         var input=ReadNumericInput("Choose the Number of the game of which you would like to see the archivments", 0,
