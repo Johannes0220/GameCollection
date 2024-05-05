@@ -69,7 +69,7 @@ public class SudokuView
         Console.CursorVisible = true;
     }
 
-    public void ShowGameOver()
+    public void DisplayGameOverMesssage()
     {
         Console.Clear();
         Console.WriteLine(" ");

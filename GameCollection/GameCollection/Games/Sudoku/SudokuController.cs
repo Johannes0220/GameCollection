@@ -125,7 +125,7 @@ public class SudokuController:IPlayable
             }
         }
 
-        _view.ShowGameOver();
+        _view.DisplayGameOverMesssage();
         //return new ScoreGameResult(_snake.GetSnakeLength());
         //return new WonGameResult(true);
         return null;
