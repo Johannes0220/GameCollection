@@ -127,8 +127,7 @@ public class SudokuController:IPlayable
         }
 
         _view.DisplayGameOverMesssage();
-        //return new WonGameResult(true);
-        return null;
+        return new WinGameResult(true);
     }
 
     public string GetName()
