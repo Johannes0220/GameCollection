@@ -1,6 +1,4 @@
-﻿using System.Dynamic;
-
-namespace GameCollection.Games.TowerOfHanoi;
+﻿namespace GameCollection.Games.TowerOfHanoi;
 
 public class TowerOfHanoi
 {

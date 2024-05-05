@@ -1,6 +1,4 @@
-﻿using System;
-using System.Globalization;
-using GameCollection.Games;
+﻿using GameCollection.Games;
 using GameCollection.Games.Memory;
 
 public class MemoryController : IPlayable

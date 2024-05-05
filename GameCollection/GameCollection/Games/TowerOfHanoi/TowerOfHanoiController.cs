@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Globalization;
-
-namespace GameCollection.Games.TowerOfHanoi;
+﻿namespace GameCollection.Games.TowerOfHanoi;
 
 public class TowerOfHanoiController :IPlayable
 {

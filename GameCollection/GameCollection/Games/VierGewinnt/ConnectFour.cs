@@ -1,6 +1,4 @@
-﻿using System.Dynamic;
-
-namespace GameCollection.Games.VierGewinnt;
+﻿namespace GameCollection.Games.VierGewinnt;
 
 public class ConnectFour
 {

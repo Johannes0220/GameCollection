@@ -1,6 +1,4 @@
-﻿using static System.Formats.Asn1.AsnWriter;
-
-namespace GameCollection.Games.Snake;
+﻿namespace GameCollection.Games.Snake;
 
 public class SnakeView
 {

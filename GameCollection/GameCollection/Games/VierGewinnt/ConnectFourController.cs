@@ -1,7 +1,4 @@
-﻿using System;
-using System.Text.Json;
-
-namespace GameCollection.Games.VierGewinnt;
+﻿namespace GameCollection.Games.VierGewinnt;
 
 public class ConnectFourController : IPlayable
 {

@@ -1,7 +1,4 @@
-﻿using System.ComponentModel.Design;
-using System.Globalization;
-
-namespace GameCollection.Games.Memory;
+﻿namespace GameCollection.Games.Memory;
 
 public class Memory
 {
