@@ -1,6 +1,4 @@
-﻿using GameCollection.Games.Snake;
-
-namespace GameCollection.Games.Sudoku;
+﻿namespace GameCollection.Games.Sudoku;
 
 public class SudokuController:IPlayable
 {
